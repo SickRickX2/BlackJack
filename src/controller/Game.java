@@ -2,7 +2,7 @@ package controller;
 
 import controller.gamestates.Gamestate;
 import model.gamestates.PlayingModel;
-import view.GamePanel;
+import view.StartPanel;
 import view.GameWindow;
 import model.GameModel;
 import controller.gamestates.PlayingController;
@@ -14,7 +14,7 @@ public class Game implements Runnable {
 
 
     private static GameWindow gameWindow;
-    protected static GamePanel gamePanel;
+    protected static StartPanel startPanel;
     private static GameModel gameModel;
     private Thread gameThread;
     private int FPS_SET = 120;
@@ -29,9 +29,9 @@ public class Game implements Runnable {
     public Game() {
         initClasses();
 
-        gamePanel = new GamePanel(this);
-        gameWindow = new GameWindow(gamePanel); // Pass the GamePanel to the GameWindow
-        gamePanel.requestFocus();
+        startPanel = new StartPanel(this);
+        gameWindow = new GameWindow(startPanel); // Pass the GamePanel to the GameWindow
+        startPanel.requestFocus();
 
         startGameLoop();
 
@@ -104,7 +104,7 @@ public class Game implements Runnable {
                 deltaU--;
             }
             if (deltaF >= 1) {
-                gamePanel.repaint();
+                startPanel.repaint();
                 frames++;
                 deltaF--;
             }

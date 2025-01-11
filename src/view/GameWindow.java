@@ -9,7 +9,7 @@ import java.awt.event.WindowFocusListener;
 public class GameWindow {
     private JFrame jframe;
 
-    public GameWindow(GamePanel gamePanel) {
+    public GameWindow(StartPanel startPanel) {
 
         jframe = new JFrame();
 
@@ -19,7 +19,7 @@ public class GameWindow {
             Taskbar.getTaskbar().setIconImage(icon);
         }catch (Exception e){}
         jframe.setIconImage(icon);
-        jframe.add(gamePanel);
+        jframe.add(startPanel);
         jframe.setTitle("BlackJack");
         jframe.pack();
         jframe.setLocationRelativeTo(null);
@@ -29,7 +29,7 @@ public class GameWindow {
 
             @Override
             public void windowGainedFocus(WindowEvent e) {
-                gamePanel.getGame().windowFocusLost();
+                startPanel.getGame().windowFocusLost();
             }
 
             @Override
