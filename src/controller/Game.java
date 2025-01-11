@@ -1,14 +1,14 @@
 package controller;
 
 import controller.gamestates.Gamestate;
-import model.gamestates.PlayingModel;
-import view.StartPanel;
-import view.GameWindow;
-import model.GameModel;
 import controller.gamestates.PlayingController;
+import model.GameModel;
+import model.gamestates.PlayingModel;
+import view.GameWindow;
+import view.StartPanel;
 import view.gamestates.PlayingView;
 
-import java.awt.Graphics;
+import java.awt.*;
 
 public class Game implements Runnable {
 
@@ -29,8 +29,9 @@ public class Game implements Runnable {
     public Game() {
         initClasses();
 
-        startPanel = new StartPanel(this);
-        gameWindow = new GameWindow(startPanel); // Pass the GamePanel to the GameWindow
+        //startPanel = new StartPanel(this);
+        //gameWindow = new GameWindow(startPanel); // Pass the GamePanel to the GameWindow
+        gameWindow = new GameWindow();
         startPanel.requestFocus();
 
         startGameLoop();

@@ -2,16 +2,21 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
 
-
-public class StartPanel extends JPanel{
+public class ProfileSelectionPanel extends JPanel implements Observer {
         private Navigator navigator;
-        public StartPanel(Navigator navigator) {
+
+
+        public ProfileSelectionPanel(Navigator navigator) {
             this.navigator = navigator;
+
+
             setPanelSize();
             setLayout(null);
             createTitle();
-            createStartButton();
+            //createStartButton();
             createQuitButton();
 
         }
@@ -30,7 +35,7 @@ public class StartPanel extends JPanel{
         }
         protected void createStartButton(){
             JButton startButton = new JButton("START");
-            startButton.addActionListener(e -> navigator.navigate(Screen.PROFILE_SELECTION));
+            //startButton.addActionListener(e -> game.getGameModel().startGame());
             startButton.setBounds(500, 500, 200, 50);
             startButton.setBackground(Color.decode("#CC7A92"));
             startButton.setForeground(Color.BLACK);
@@ -40,7 +45,8 @@ public class StartPanel extends JPanel{
 
         }
         protected void createQuitButton(){
-            JButton quitButton = new JButton("QUIT");
+            JButton quitButton = new JButton("MENU");
+            quitButton.addActionListener(e -> navigator.navigate(Screen.START));
 
             quitButton.setBounds(500, 600, 200, 50);
             quitButton.setBackground(Color.decode("#CC7A92"));
@@ -51,11 +57,15 @@ public class StartPanel extends JPanel{
         }
 
         protected void createTitle(){
-            ImageIcon title = new ImageIcon("res/images/blackjacktitle.png");
-            JLabel titleLabel = new JLabel(title);
-            titleLabel.setBounds(300, 50, title.getIconWidth(), title.getIconHeight()); // Posiziona il titolo
+            JLabel titleLabel = new JLabel("Profile Selection");
+           // Posiziona il titolo
+            titleLabel.setBounds(500, 100, 200, 50);
             add(titleLabel);
         }
+
+
+    @Override
+    public void update(Observable o, Object arg) {
+
+    }
 }
-
-
