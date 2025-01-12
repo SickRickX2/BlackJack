@@ -42,6 +42,8 @@ public class StartPanel extends JPanel{
         protected void createQuitButton(){
             JButton quitButton = new JButton("QUIT");
 
+            quitButton.addActionListener(e -> System.exit(0));
+
             quitButton.setBounds(500, 600, 200, 50);
             quitButton.setBackground(Color.decode("#CC7A92"));
             quitButton.setForeground(Color.BLACK);

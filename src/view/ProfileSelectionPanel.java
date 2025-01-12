@@ -47,7 +47,6 @@ public class ProfileSelectionPanel extends JPanel implements Observer {
         protected void createQuitButton(){
             JButton quitButton = new JButton("MENU");
             quitButton.addActionListener(e -> navigator.navigate(Screen.START));
-
             quitButton.setBounds(500, 600, 200, 50);
             quitButton.setBackground(Color.decode("#CC7A92"));
             quitButton.setForeground(Color.BLACK);
@@ -59,7 +58,9 @@ public class ProfileSelectionPanel extends JPanel implements Observer {
         protected void createTitle(){
             JLabel titleLabel = new JLabel("Profile Selection");
            // Posiziona il titolo
-            titleLabel.setBounds(500, 100, 200, 50);
+            titleLabel.setBounds(470, 100, 300, 50);
+            titleLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
+            titleLabel.setForeground(Color.WHITE);
             add(titleLabel);
         }
 
