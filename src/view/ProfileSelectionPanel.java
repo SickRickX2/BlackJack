@@ -2,21 +2,18 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Observable;
-import java.util.Observer;
 
-public class ProfileSelectionPanel extends JPanel implements Observer {
+public class ProfileSelectionPanel extends JPanel {
         private Navigator navigator;
 
 
         public ProfileSelectionPanel(Navigator navigator) {
             this.navigator = navigator;
 
-
             setPanelSize();
             setLayout(null);
             createTitle();
-            //createStartButton();
+            createPlayButton();
             createQuitButton();
 
         }
@@ -33,9 +30,9 @@ public class ProfileSelectionPanel extends JPanel implements Observer {
             this.setBackground(Color.BLACK);
 
         }
-        protected void createStartButton(){
-            JButton startButton = new JButton("START");
-            //startButton.addActionListener(e -> game.getGameModel().startGame());
+        protected void createPlayButton(){
+            JButton startButton = new JButton("PLAY");
+            startButton.addActionListener(e -> navigator.navigate(Screen.PLAY));
             startButton.setBounds(500, 500, 200, 50);
             startButton.setBackground(Color.decode("#CC7A92"));
             startButton.setForeground(Color.BLACK);
@@ -65,8 +62,4 @@ public class ProfileSelectionPanel extends JPanel implements Observer {
         }
 
 
-    @Override
-    public void update(Observable o, Object arg) {
-
-    }
 }
