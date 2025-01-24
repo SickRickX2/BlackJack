@@ -11,24 +11,17 @@ public class PlayPanel extends JPanel implements Observer {
     public PlayPanel(Navigator navigator) {
         this.navigator = navigator;
         setLayout(new BorderLayout());
-        createPlayground();
+        setBackground(Color.BLACK);
         createButtons();
-    }
-
-    private void createPlayground() {
-        JPanel playground = new JPanel();
-        playground.setBackground(new Color(100, 30, 22));
-        add(playground, BorderLayout.CENTER);
     }
 
     protected void paintComponent(Graphics g) {
 
         setPanelSize();
+
         super.paintComponent(g);
-        int density = 50;
-        g.setColor(Color.decode("#CC7A92"));
-        for (int x = 0; x <= getWidth() + getHeight(); x += density) g.drawLine(x, 0, 0, x);
-        this.setBackground(Color.BLACK);
+        paintHiddenCard(g);
+        this.setBackground(new Color(100, 30, 22));
 
     }
     private void setPanelSize() {
@@ -85,6 +78,13 @@ public class PlayPanel extends JPanel implements Observer {
         hitButton.setFocusPainted(false);
         //add(stayButton, BorderLayout.SOUTH);
         return hitButton;
+    }
+    private void paintHiddenCard(Graphics g){
+       Image hiddenCard = new ImageIcon("res/images/cards/BACK.png").getImage();
+         g.drawImage(hiddenCard, 255, 20,150,204, this);
+
+
+
     }
 
     @Override

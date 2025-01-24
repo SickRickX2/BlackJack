@@ -6,6 +6,10 @@ import java.util.Random;
 public class DeckModel {
     ArrayList<CardModel> deck = new ArrayList<CardModel>();
     Random random = new Random();
+    public DeckModel(){
+        createDeck();
+        shuffleDeck();
+    }
     public void createDeck(){
         for(Suit suit : Suit.values()){
             for(Value value : Value.values()){
@@ -25,4 +29,5 @@ public class DeckModel {
         }
 
     }
+
 }
