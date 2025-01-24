@@ -18,10 +18,9 @@ public class PlayPanel extends JPanel implements Observer {
     protected void paintComponent(Graphics g) {
 
         setPanelSize();
-
         super.paintComponent(g);
         paintHiddenCard(g);
-        this.setBackground(new Color(100, 30, 22));
+        this.setBackground(new Color(14, 14, 125));
 
     }
     private void setPanelSize() {
@@ -58,7 +57,7 @@ public class PlayPanel extends JPanel implements Observer {
 
         //stayButton.addActionListener(e -> System.exit(0));
 
-        stayButton.setBackground(Color.decode("#CC7A92"));
+        stayButton.setBackground(Color.WHITE);
         stayButton.setForeground(Color.BLACK);
         stayButton.setFont(new Font("Tahoma", Font.BOLD, 30));
         stayButton.setFocusPainted(false);
@@ -72,7 +71,7 @@ public class PlayPanel extends JPanel implements Observer {
 
         //stayButton.addActionListener(e -> System.exit(0));
 
-        hitButton.setBackground(Color.decode("#CC7A92"));
+        hitButton.setBackground(Color.WHITE);
         hitButton.setForeground(Color.BLACK);
         hitButton.setFont(new Font("Tahoma", Font.BOLD, 30));
         hitButton.setFocusPainted(false);

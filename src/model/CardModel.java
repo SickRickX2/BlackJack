@@ -1,5 +1,7 @@
 package model;
 
+import static model.Value.ACE;
+
 public class CardModel {
     private Suit suit;
     private Value value;
@@ -14,32 +16,45 @@ public class CardModel {
         return value;
     }
     public int getCardValue(){
-        if (value == Value.ACE){
-            return 11;
-        } else if (value == Value.TWO){
-            return 2;
-        } else if (value == Value.THREE){
-            return 3;
-        } else if (value == Value.FOUR){
-            return 4;
-        } else if (value == Value.FIVE){
-            return 5;
-        } else if (value == Value.SIX){
-            return 6;
-        } else if (value == Value.SEVEN){
-            return 7;
-        } else if (value == Value.EIGHT){
-            return 8;
-        } else if (value == Value.NINE){
-            return 9;
-        } else {
-            return 10;
+        switch (value) {
+            case ACE:
+                return 11;
+            case TWO:
+                return 2;
+            case THREE:
+                return 3;
+            case FOUR:
+                return 4;
+            case FIVE:
+                return 5;
+            case SIX:
+                return 6;
+            case SEVEN:
+                return 7;
+            case EIGHT:
+                return 8;
+            case NINE:
+                return 9;
+            default:
+                return 10;
         }
+    }
+    public String getCardSuit(){
+        switch(suit){
+            case HEARTS:
+                return "-H";
+             case DIAMONDS:
+                return "-D";
+            case CLUBS:
+                return "-C";
+            case SPADES:
+                return "-S";
+            default: return null; }
     }
 
 
     public boolean isAce() {
-        return value == Value.ACE;
+        return value == ACE;
 
     }
 }
