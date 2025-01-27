@@ -2,7 +2,10 @@ package controller;
 
 import controller.gamestates.Gamestate;
 import controller.gamestates.PlayingController;
+import model.DealerModel;
+import model.DeckModel;
 import model.GameModel;
+import model.PlayerModel;
 import model.gamestates.PlayingModel;
 import view.GameWindow;
 import view.StartPanel;
@@ -23,18 +26,16 @@ public class Game implements Runnable {
     private PlayingModel playingModel;
     private PlayingController playingController;
     private PlayingView playingView;
+    private DeckModel deckModel;
+    private DealerModel dealerModel;
+    private PlayerModel playerModel;
 
 
 
     public Game() {
         initClasses();
-
-        //startPanel = new StartPanel(this);
-        //gameWindow = new GameWindow(startPanel); // Pass the GamePanel to the GameWindow
         gameWindow = new GameWindow();
         startPanel.requestFocus();
-
-        startGameLoop();
 
     }
 
@@ -42,6 +43,9 @@ public class Game implements Runnable {
         playingModel = new PlayingModel();
         playingController = new PlayingController(playingModel);
         playingView = new PlayingView(playingModel);
+        deckModel = DeckModel.getInstance();
+        dealerModel =  DealerModel.getInstance();
+        playerModel = new PlayerModel();
     }
 
     private void startGameLoop() {
@@ -92,7 +96,7 @@ public class Game implements Runnable {
         double deltaU = 0;
         double deltaF = 0;
 
-        while (true) {
+        while(true) {
             now = System.nanoTime();
             long currentTime = System.nanoTime();
 
@@ -133,5 +137,9 @@ public class Game implements Runnable {
     public PlayingController getPlayingController() {
         return playingController;
     }
+    public DealerModel getDealerModel(){
+        return dealerModel;
+    }
+
 
 }

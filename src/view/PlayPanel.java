@@ -1,5 +1,8 @@
 package view;
 
+import model.CardModel;
+import model.DealerModel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Observable;
@@ -7,6 +10,7 @@ import java.util.Observer;
 
 public class PlayPanel extends JPanel implements Observer {
     private Navigator navigator;
+    private final int CARD_WIDTH = 150*80/100, CARD_HEIGHT = 204*80/100;
 
     public PlayPanel(Navigator navigator) {
         this.navigator = navigator;
@@ -20,6 +24,7 @@ public class PlayPanel extends JPanel implements Observer {
         setPanelSize();
         super.paintComponent(g);
         paintHiddenCard(g);
+        paintDealerHand(g);
         this.setBackground(new Color(14, 14, 125));
 
     }
@@ -80,10 +85,14 @@ public class PlayPanel extends JPanel implements Observer {
     }
     private void paintHiddenCard(Graphics g){
        Image hiddenCard = new ImageIcon("res/images/cards/BACK.png").getImage();
-         g.drawImage(hiddenCard, 255, 20,150,204, this);
-
-
-
+         g.drawImage(hiddenCard, 255, 20,CARD_WIDTH,CARD_HEIGHT, this);
+    }
+    private void paintDealerHand(Graphics g){
+        for (int i = 0; i < DealerModel.getInstance().getHand().size(); i++){
+            CardModel card = DealerModel.getInstance().getHand().get(i);
+            Image cardImage = new ImageIcon((card.getCardImagePath())).getImage();
+            g.drawImage(cardImage,(255+10+CARD_WIDTH)+(10+CARD_WIDTH/2)*(i), 20,CARD_WIDTH,CARD_HEIGHT, this);
+        }
     }
 
     @Override

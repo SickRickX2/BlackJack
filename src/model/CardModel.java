@@ -57,4 +57,13 @@ public class CardModel {
         return value == ACE;
 
     }
+    public String getCardImagePath(){
+        return "res/images/cards/" + toString() + ".png";
+    }
+
+    @Override
+    public String toString(){
+        return getCardValue() + getCardSuit();
+    }
+
 }
