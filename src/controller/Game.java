@@ -3,6 +3,7 @@ package controller;
 import model.DealerModel;
 import model.DeckModel;
 import model.PlayerModel;
+import model.TurnManager;
 import view.GameWindow;
 
 public class Game implements Runnable {
@@ -16,15 +17,19 @@ public class Game implements Runnable {
 
 
     public Game() {
-        initClasses();
+
         gameWindow = new GameWindow();
+        initClasses();
         startGameLoop();
 
     }
     private void initClasses() {
+        TurnManager.getInstance();
         DeckModel.getInstance();
         DealerModel.getInstance();
         PlayerModel.getInstance();
+
+        TurnManager.getInstance().addObserver(gameWindow.getPlayPanel());
     }
 
     private void startGameLoop() {

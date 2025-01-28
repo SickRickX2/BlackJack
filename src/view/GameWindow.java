@@ -8,12 +8,7 @@ import java.util.Observer;
 
 public class GameWindow extends JFrame implements Observer {
     private JPanel deck;
-    private StartPanel startPanel;
-    private ProfileSelectionPanel profileSelectionPanel;
     private PlayPanel playPanel;
-    private WinPanel winPanel;
-    private LosePanel losePanel;
-
 
     public GameWindow() {
 
@@ -45,17 +40,21 @@ public class GameWindow extends JFrame implements Observer {
     private void initDeck() {
         Navigator navigator = new Navigator();
         navigator.addObserver(this);
+        playPanel = new PlayPanel(navigator);
         deck = new JPanel(new CardLayout()) {
             {
                 add(new StartPanel(navigator), Screen.START.name());
                 add(new ProfileSelectionPanel(navigator), Screen.PROFILE_SELECTION.name());
-                add(new PlayPanel(navigator), Screen.PLAY.name());
+                add(playPanel, Screen.PLAY.name());
                 add(new WinPanel(), Screen.WIN.name());
                 add(new LosePanel(), Screen.LOSE.name());
             }
         };
 
     add(deck);
+    }
+    public PlayPanel getPlayPanel() {
+        return playPanel;
     }
 
     @Override

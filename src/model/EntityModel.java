@@ -27,7 +27,8 @@ public abstract class EntityModel {
         System.out.println("Player's hand: " + hand);
     }
     public void stay(){
-        //TODO passa il turno
+        TurnManager.getInstance().nextTurn();
+        System.out.println("Player stays");
     }
     public ArrayList<CardModel> getHand(){
        return hand;
