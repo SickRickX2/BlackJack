@@ -2,8 +2,9 @@ package model;
 
 public class DealerModel extends EntityModel {
     private static DealerModel instance = null;
+
+    private boolean hidden = true;
     private DealerModel(){
-        drawCard();
         drawCard();
         drawCard();
 
@@ -14,5 +15,10 @@ public class DealerModel extends EntityModel {
         }
         return instance;
     }
+
+    public boolean isHidden(){
+        return hidden;
+    }
+
 
 }

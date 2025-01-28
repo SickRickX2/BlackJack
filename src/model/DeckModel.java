@@ -25,7 +25,7 @@ public class DeckModel {
         }
     }
     public CardModel getCard(){
-        return deck.remove(deck.size() - 1);
+        return deck.remove(deck.size()-1);
     }
     public void shuffleDeck(){
         for (int i = 0; i < deck.size(); i++){

@@ -63,7 +63,7 @@ public class CardModel {
 
     @Override
     public String toString(){
-        return getCardValue() + getCardSuit();
+        return getValue().getSymbol() + getCardSuit();
     }
 
 }

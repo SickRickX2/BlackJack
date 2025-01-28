@@ -35,10 +35,8 @@ public class Game implements Runnable {
     public Game() {
         initClasses();
         gameWindow = new GameWindow();
-        startPanel.requestFocus();
 
     }
-
     private void initClasses() {
         playingModel = new PlayingModel();
         playingController = new PlayingController(playingModel);

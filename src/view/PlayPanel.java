@@ -17,13 +17,14 @@ public class PlayPanel extends JPanel implements Observer {
         setLayout(new BorderLayout());
         setBackground(Color.BLACK);
         createButtons();
+        System.out.println("dealer hand size: " + DealerModel.getInstance().getHand().size());
+        System.out.println("dealer hand: " + DealerModel.getInstance().getHand());
     }
 
     protected void paintComponent(Graphics g) {
 
         setPanelSize();
         super.paintComponent(g);
-        paintHiddenCard(g);
         paintDealerHand(g);
         this.setBackground(new Color(14, 14, 125));
 
@@ -88,11 +89,22 @@ public class PlayPanel extends JPanel implements Observer {
          g.drawImage(hiddenCard, 255, 20,CARD_WIDTH,CARD_HEIGHT, this);
     }
     private void paintDealerHand(Graphics g){
-        for (int i = 0; i < DealerModel.getInstance().getHand().size(); i++){
+        if (DealerModel.getInstance().isHidden()){
+            paintHiddenCard(g);
+        }
+        else{
+            revealHiddenCard(g);
+        }
+        for (int i = 1; i < DealerModel.getInstance().getHand().size(); i++){
             CardModel card = DealerModel.getInstance().getHand().get(i);
             Image cardImage = new ImageIcon((card.getCardImagePath())).getImage();
-            g.drawImage(cardImage,(255+10+CARD_WIDTH)+(10+CARD_WIDTH/2)*(i), 20,CARD_WIDTH,CARD_HEIGHT, this);
+            g.drawImage(cardImage,(255+10+CARD_WIDTH/2)+(10+CARD_WIDTH/2)*(i), 20,CARD_WIDTH,CARD_HEIGHT, this);
         }
+    }
+    private void revealHiddenCard(Graphics g){
+        CardModel card = DealerModel.getInstance().getHand().get(0);
+        Image cardImage = new ImageIcon((card.getCardImagePath())).getImage();
+        g.drawImage(cardImage, 255, 20,CARD_WIDTH,CARD_HEIGHT, this);
     }
 
     @Override
