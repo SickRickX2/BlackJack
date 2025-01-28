@@ -26,11 +26,10 @@ public abstract class EntityModel {
         drawCard();
         changeAceValue();
         bustsCheck();
-        System.out.println("Player's hand: " + hand);
+
     }
     public void stay(){
         TurnManager.getInstance().nextTurn();
-        System.out.println("Player stays");
     }
     public ArrayList<CardModel> getHand(){
        return hand;
@@ -41,12 +40,11 @@ public abstract class EntityModel {
     public int getAceCount(){
         return aceCount;
     }
-    public int changeAceValue(){
+    public void changeAceValue(){
         while(sum > 21 && aceCount > 0){
             sum -= 10;
             aceCount--;
         }
-        return sum;
     }
     public abstract void bustsCheck();
 

@@ -19,8 +19,6 @@ public class TurnManager extends Observable {
                 Bot2Model.getInstance();
                 break;
         }
-
-
     }
 
     public static TurnManager getInstance() {
@@ -40,6 +38,7 @@ public class TurnManager extends Observable {
         }
         else if (currentTurn == Turn.PLAYER && botCount == 0){
             currentTurn = Turn.DEALER;
+            System.out.println("Dealer's turn");
             setChanged();
             notifyObservers();
         }
@@ -52,8 +51,9 @@ public class TurnManager extends Observable {
         if (currentTurn == Turn.BOT2)
             currentTurn = Turn.DEALER;
 
-        if (currentTurn == Turn.DEALER)
-            currentTurn = Turn.END;
+       if (currentTurn == Turn.DEALER)
+           DealerModel.getInstance().hit();
+           currentTurn = Turn.END;
 
 
 

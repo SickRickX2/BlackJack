@@ -20,8 +20,7 @@ public class PlayPanel extends JPanel implements Observer {
         setLayout(new BorderLayout());
         setBackground(Color.BLACK);
         createButtons();
-        System.out.println("dealer hand size: " + DealerModel.getInstance().getHand().size());
-        System.out.println("dealer hand: " + DealerModel.getInstance().getHand());
+
     }
 
     protected void paintComponent(Graphics g) {
@@ -29,7 +28,6 @@ public class PlayPanel extends JPanel implements Observer {
         super.paintComponent(g);
         paintDealerHand(g);
         paintPlayerHand(g);
-        System.out.println("Player's sum: " + PlayerModel.getInstance().getSum());
         this.setBackground(new Color(14, 14, 125));
     }
 
@@ -107,7 +105,7 @@ public class PlayPanel extends JPanel implements Observer {
     }
 
     private void paintPlayerHand(Graphics g){
-        CardModel card = PlayerModel.getInstance().getHand().get(0);
+        CardModel card = PlayerModel.getInstance().getHand().getFirst();
         Image cardImage = new ImageIcon((card.getCardImagePath())).getImage();
         g.drawImage(cardImage, 255, 565,CARD_WIDTH,CARD_HEIGHT, this);
         for (int i = 1; i < PlayerModel.getInstance().getHand().size(); i++){
