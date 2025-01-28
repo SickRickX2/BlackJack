@@ -10,6 +10,9 @@ public abstract class EntityModel {
 
 
     protected EntityModel() {
+        for (int i = 0; i < 2; i++) {
+            drawCard();
+        }
 
     }
 
@@ -19,10 +22,11 @@ public abstract class EntityModel {
         aceCount += card.isAce() ? 1 : 0;
         hand.add(card);
     }
-    private void hit(){
+    public void hit(){
         drawCard();
+        System.out.println("Player's hand: " + hand);
     }
-    private void stay(){
+    public void stay(){
         //TODO passa il turno
     }
     public ArrayList<CardModel> getHand(){

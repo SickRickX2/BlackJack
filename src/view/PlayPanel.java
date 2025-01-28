@@ -2,6 +2,7 @@ package view;
 
 import model.CardModel;
 import model.DealerModel;
+import model.PlayerModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,6 +27,7 @@ public class PlayPanel extends JPanel implements Observer {
         setPanelSize();
         super.paintComponent(g);
         paintDealerHand(g);
+        paintPlayerHand(g);
         this.setBackground(new Color(14, 14, 125));
 
     }
@@ -75,7 +77,7 @@ public class PlayPanel extends JPanel implements Observer {
         JButton hitButton = new JButton("HIT");
 
 
-        //stayButton.addActionListener(e -> System.exit(0));
+        hitButton.addActionListener(e -> PlayerModel.getInstance().hit());
 
         hitButton.setBackground(Color.WHITE);
         hitButton.setForeground(Color.BLACK);
@@ -106,7 +108,16 @@ public class PlayPanel extends JPanel implements Observer {
         Image cardImage = new ImageIcon((card.getCardImagePath())).getImage();
         g.drawImage(cardImage, 255, 20,CARD_WIDTH,CARD_HEIGHT, this);
     }
-
+    private void paintPlayerHand(Graphics g){
+        CardModel card = PlayerModel.getInstance().getHand().get(0);
+        Image cardImage = new ImageIcon((card.getCardImagePath())).getImage();
+        g.drawImage(cardImage, 255, 565,CARD_WIDTH,CARD_HEIGHT, this);
+        for (int i = 1; i < PlayerModel.getInstance().getHand().size(); i++){
+            card = PlayerModel.getInstance().getHand().get(i);
+            cardImage = new ImageIcon((card.getCardImagePath())).getImage();
+            g.drawImage(cardImage,(255+10+CARD_WIDTH/2)+(10+CARD_WIDTH/2)*(i), 565,CARD_WIDTH,CARD_HEIGHT, this);
+        }
+    }
     @Override
     public void update(Observable o, Object arg) {
 

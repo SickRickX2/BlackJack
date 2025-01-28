@@ -5,8 +5,7 @@ public class DealerModel extends EntityModel {
 
     private boolean hidden = true;
     private DealerModel(){
-        drawCard();
-        drawCard();
+
 
     }
     public static DealerModel getInstance(){

@@ -12,7 +12,4 @@ public enum Value {
     public String getSymbol(){
         return symbol;
     }
-    public static int getValuesLength(){
-        return Value.values().length;
-    }
 }
