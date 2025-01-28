@@ -29,6 +29,7 @@ public class PlayPanel extends JPanel implements Observer {
         super.paintComponent(g);
         paintDealerHand(g);
         paintPlayerHand(g);
+        System.out.println("Player's sum: " + PlayerModel.getInstance().getSum());
         this.setBackground(new Color(14, 14, 125));
     }
 
@@ -119,6 +120,5 @@ public class PlayPanel extends JPanel implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         disableButtons();
-        System.out.println("disattivato");
     }
 }

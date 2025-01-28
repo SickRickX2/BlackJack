@@ -9,6 +9,19 @@ public class TurnManager extends Observable {
 
     private TurnManager() {
     }
+    public void createBot() {
+        switch(botCount) {
+            case 1:
+                Bot1Model.getInstance();
+                break;
+            case 2:
+                Bot1Model.getInstance();
+                Bot2Model.getInstance();
+                break;
+        }
+
+
+    }
 
     public static TurnManager getInstance() {
         if (instance == null) {
@@ -46,6 +59,11 @@ public class TurnManager extends Observable {
 
 
     }
+
+    public Turn getCurrentTurn() {
+        return currentTurn;
+    }
+
     public enum Turn {
         PLAYER, DEALER, BOT1, BOT2, END
     }

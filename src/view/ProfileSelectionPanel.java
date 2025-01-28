@@ -1,5 +1,7 @@
 package view;
 
+import model.TurnManager;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -32,7 +34,8 @@ public class ProfileSelectionPanel extends JPanel {
         }
         protected void createPlayButton(){
             JButton startButton = new JButton("PLAY");
-            startButton.addActionListener(e -> navigator.navigate(Screen.PLAY));
+            startButton.addActionListener(e -> {navigator.navigate(Screen.PLAY);
+                TurnManager.getInstance().createBot();});
             startButton.setBounds(500, 500, 200, 50);
             startButton.setBackground(Color.decode("#CC7A92"));
             startButton.setForeground(Color.BLACK);

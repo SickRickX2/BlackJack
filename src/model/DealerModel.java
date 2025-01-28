@@ -18,6 +18,10 @@ public class DealerModel extends EntityModel {
     public boolean isHidden(){
         return hidden;
     }
+    @Override
+    public void bustsCheck() {
+
+    }
 
 
 }
