@@ -5,7 +5,7 @@ import java.util.Observable;
 public class TurnManager extends Observable {
     private static TurnManager instance = null;
     private Turn currentTurn = Turn.PLAYER;
-    private int botCount = 0;
+    private int botCount = 2;
 
     private TurnManager() {
     }

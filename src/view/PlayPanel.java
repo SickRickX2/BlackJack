@@ -111,13 +111,23 @@ public class PlayPanel extends JPanel implements Observer {
         CardModel card = DealerModel.getInstance().getHand().get(0);
         Image cardImage = new ImageIcon((card.getCardImagePath())).getImage();
         g.drawImage(cardImage, 400, 20,CARD_WIDTH,CARD_HEIGHT, this);
-        drawDealerSum(g);
+        paintDealerSum(g);
     }
 
-    private void drawDealerSum(Graphics g) {
+    private void paintDealerSum(Graphics g) {
         g.setColor(Color.WHITE);
         g.setFont(new Font("Tahoma", Font.BOLD, 30));
         g.drawString("Dealer sum: " + DealerModel.getInstance().getSum(), 400, 220);
+    }
+    private void paintBot1Sum(Graphics g) {
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Tahoma", Font.BOLD, 30));
+        g.drawString("Bot1 sum: " + Bot1Model.getInstance().getSum(), 10, 150);
+    }
+    private void paintBot2Sum(Graphics g) {
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Tahoma", Font.BOLD, 30));
+        g.drawString("Bot2 sum: " + Bot2Model.getInstance().getSum(), 990, 150);
     }
 
     private void paintPlayerHand(Graphics g){
@@ -149,6 +159,7 @@ public class PlayPanel extends JPanel implements Observer {
             g2d.drawImage(cardImage, x1+CARD_WIDTH/2*(i), y1, CARD_WIDTH, CARD_HEIGHT, this);
             g2d.rotate(Math.toRadians(-90), x1 + CARD_WIDTH / 2, y1 + CARD_HEIGHT / 2);
         }
+        paintBot1Sum(g);
     }
     private void paintBot2Hand(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
@@ -169,6 +180,7 @@ public class PlayPanel extends JPanel implements Observer {
             g2d.drawImage(cardImage, x1+CARD_WIDTH/2*(i), y1, CARD_WIDTH, CARD_HEIGHT, this);
             g2d.rotate(Math.toRadians(-90), x1 + CARD_WIDTH / 2, y1 + CARD_HEIGHT / 2);
         }
+        paintBot2Sum(g);
     }
     private void paintPlayerSum(Graphics g){
         g.setColor(Color.WHITE);
