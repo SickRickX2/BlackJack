@@ -4,6 +4,7 @@ import model.DealerModel;
 import model.DeckModel;
 import model.PlayerModel;
 import model.TurnManager;
+import model.profiles.ProfileManager;
 import view.GameWindow;
 
 public class Game implements Runnable {
@@ -24,6 +25,7 @@ public class Game implements Runnable {
 
     }
     private void initClasses() {
+        ProfileManager.getInstance();
         TurnManager.getInstance();
         DeckModel.getInstance();
         DealerModel.getInstance();

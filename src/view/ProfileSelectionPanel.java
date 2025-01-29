@@ -7,6 +7,9 @@ import java.awt.*;
 
 public class ProfileSelectionPanel extends JPanel {
         private Navigator navigator;
+        private JButton bot0Button;
+        private JButton bot1Button;
+        private JButton bot2Button;
 
 
         public ProfileSelectionPanel(Navigator navigator) {
@@ -17,6 +20,11 @@ public class ProfileSelectionPanel extends JPanel {
             createTitle();
             createPlayButton();
             createQuitButton();
+            //createProfileButton();
+            createBot0Button();
+            createBot1Button();
+            createBot2Button();
+            cpuTitle();
 
         }
         private void setPanelSize() {
@@ -44,6 +52,72 @@ public class ProfileSelectionPanel extends JPanel {
             add(startButton);
 
         }
+        private void createProfileButton(){
+            JButton profileButton = new JButton("PROFILE");
+            //profileButton.addActionListener(e -> navigator.navigate());
+            profileButton.setBounds(500, 400, 200, 50);
+            profileButton.setBackground(Color.WHITE);
+            profileButton.setForeground(new Color(14, 125, 125));
+            profileButton.setFont(new Font("Tahoma", Font.BOLD, 30));
+            profileButton.setFocusPainted(false);
+            add(profileButton);
+        }
+        private void cpuTitle(){
+            JLabel cpuLabel = new JLabel(" Numero di CPU");
+            cpuLabel.setBounds(480, 670, 245, 50);
+            cpuLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
+            cpuLabel.setForeground(Color.WHITE);
+            cpuLabel.setBackground(Color.GRAY);
+            cpuLabel.setOpaque(true);
+            add(cpuLabel);
+        }
+
+
+
+    private void createBot0Button(){
+        JButton bot0Button = new JButton("0");
+        bot0Button.addActionListener(e ->{resetBotButtons();bot0Button.setForeground(Color.BLACK);TurnManager.getInstance().setBotCount(0);} );
+        bot0Button.setBounds(480, 720, 82, 50);
+        bot0Button.setBackground(new Color(14, 125, 125));
+        bot0Button.setForeground(Color.BLACK);
+        bot0Button.setFont(new Font("Tahoma", Font.BOLD, 30));
+        bot0Button.setFocusPainted(false);
+        add(bot0Button);
+        this.bot0Button = bot0Button;
+    }
+    private void createBot1Button(){
+        JButton bot1Button = new JButton("1");
+        bot1Button.addActionListener(e ->{resetBotButtons();bot1Button.setForeground(Color.BLACK);TurnManager.getInstance().setBotCount(1);} );
+        bot1Button.setBounds(561, 720, 82, 50);
+        bot1Button.setBackground(new Color(14, 125, 125));
+        bot1Button.setForeground(Color.WHITE);
+        bot1Button.setFont(new Font("Tahoma", Font.BOLD, 30));
+        bot1Button.setFocusPainted(false);
+        add(bot1Button);
+        this.bot1Button = bot1Button;
+    }
+    private void createBot2Button(){
+        JButton bot2Button = new JButton("2");
+        bot2Button.addActionListener(e ->{resetBotButtons();bot2Button.setForeground(Color.BLACK); TurnManager.getInstance().setBotCount(2);} );
+        bot2Button.setBounds(641, 720, 83, 50);
+        bot2Button.setBackground(new Color(14, 125, 125));
+        bot2Button.setForeground(Color.WHITE);
+        bot2Button.setFont(new Font("Tahoma", Font.BOLD, 30));
+        bot2Button.setFocusPainted(false);
+        add(bot2Button);
+        this.bot2Button = bot2Button;
+    }
+
+    private void resetBotButtons(){
+        bot0Button.setForeground(Color.WHITE);
+        bot1Button.setForeground(Color.WHITE);
+        bot2Button.setForeground(Color.WHITE);
+    }
+
+
+
+
+
         protected void createQuitButton(){
             JButton quitButton = new JButton("MENU");
             quitButton.addActionListener(e -> navigator.navigate(Screen.START));
