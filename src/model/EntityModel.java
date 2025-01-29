@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public abstract class EntityModel {
     protected int sum = 0;
     protected int aceCount = 0;
+    protected boolean blackjack = false;
+    protected boolean busts = false;
 
     protected ArrayList<CardModel> hand = new ArrayList<CardModel>();
 
@@ -13,6 +15,7 @@ public abstract class EntityModel {
         for (int i = 0; i < 2; i++) {
             drawCard();
         }
+        blackjackCheck();
 
     }
 
@@ -45,6 +48,14 @@ public abstract class EntityModel {
             sum -= 10;
             aceCount--;
         }
+    }
+    public  void blackjackCheck(){
+        if (sum == 21 && hand.size() == 2){
+            blackjack = true;
+        }
+    }
+    public void endTurn(){
+        TurnManager.getInstance().nextTurn();
     }
     public abstract void bustsCheck();
 

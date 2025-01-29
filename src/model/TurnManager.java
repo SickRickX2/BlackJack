@@ -41,6 +41,8 @@ public class TurnManager extends Observable {
             System.out.println("Dealer's turn");
             setChanged();
             notifyObservers();
+            DealerModel.getInstance().hit();
+
         }
 
         if (currentTurn == Turn.BOT1 && botCount >= 2)
@@ -52,13 +54,13 @@ public class TurnManager extends Observable {
             currentTurn = Turn.DEALER;
 
        if (currentTurn == Turn.DEALER)
-           DealerModel.getInstance().hit();
            currentTurn = Turn.END;
 
 
 
 
     }
+
 
     public Turn getCurrentTurn() {
         return currentTurn;

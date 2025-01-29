@@ -5,8 +5,7 @@ public class PlayerModel extends EntityModel {
 
 
     private PlayerModel() {
-
-
+        blackjackCheck();
     }
     public static PlayerModel getInstance(){
         if(instance == null){
@@ -14,10 +13,12 @@ public class PlayerModel extends EntityModel {
         }
         return instance;
     }
+    @Override
     public void bustsCheck() {
         while (TurnManager.getInstance().getCurrentTurn() == TurnManager.Turn.PLAYER) {
             if (sum > 21) {
-                TurnManager.getInstance().nextTurn();
+                busts = true;
+                endTurn();
             } else {
                 return;
 

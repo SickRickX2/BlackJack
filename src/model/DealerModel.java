@@ -24,7 +24,14 @@ public class DealerModel extends EntityModel {
 
     @Override
     public void hit() {
-        while (sum < 17 || (PlayerModel.getInstance().getSum() <= 21 && PlayerModel.getInstance().getSum() > sum) || (Bot1Model.getInstance().getSum() <= 21 && Bot1Model.getInstance().getSum() > sum) || (Bot2Model.getInstance().getSum() <= 21 && Bot2Model.getInstance().getSum() > sum)){
+        if (PlayerModel.getInstance().sum < sum){
+            endTurn();
+        }
+        else
+        if (PlayerModel.getInstance().busts){
+            endTurn();
+            }
+        else while ((PlayerModel.getInstance().getSum() <= 21 && PlayerModel.getInstance().getSum() > sum) || (Bot1Model.getInstance().getSum() <= 21 && Bot1Model.getInstance().getSum() > sum) || (Bot2Model.getInstance().getSum() <= 21 && Bot2Model.getInstance().getSum() > sum)){
             super.hit();
         }
 
@@ -34,15 +41,12 @@ public class DealerModel extends EntityModel {
     public void bustsCheck() {
         while (TurnManager.getInstance().getCurrentTurn() == TurnManager.Turn.DEALER) {
             if (sum > 21) {
-                TurnManager.getInstance().nextTurn();
+                busts = true;
+                endTurn();
             } else {
                 return;
 
             }
         }
-
-
     }
-
-
 }
