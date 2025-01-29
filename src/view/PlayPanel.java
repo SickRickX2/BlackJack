@@ -1,6 +1,7 @@
 package view;
 
 import model.*;
+import model.profiles.ProfileManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -95,6 +96,7 @@ public class PlayPanel extends JPanel implements Observer {
     }
 
     private void paintDealerHand(Graphics g){
+        paintCPUAvatar(g, 345, 185);
         if (DealerModel.getInstance().isHidden()){
             paintHiddenCard(g);
         } else {
@@ -117,17 +119,24 @@ public class PlayPanel extends JPanel implements Observer {
     private void paintDealerSum(Graphics g) {
         g.setColor(Color.WHITE);
         g.setFont(new Font("Tahoma", Font.BOLD, 30));
-        g.drawString("Dealer sum: " + DealerModel.getInstance().getSum(), 400, 220);
+        g.drawString("Dealer's sum: " + DealerModel.getInstance().getSum(), 400, 220);
+
     }
     private void paintBot1Sum(Graphics g) {
         g.setColor(Color.WHITE);
         g.setFont(new Font("Tahoma", Font.BOLD, 30));
-        g.drawString("Bot1 sum: " + Bot1Model.getInstance().getSum(), 10, 150);
+        g.drawString("Bot1's sum: " + Bot1Model.getInstance().getSum(), 10, 150);
+        paintCPUAvatar(g, 10, 65);
     }
     private void paintBot2Sum(Graphics g) {
         g.setColor(Color.WHITE);
         g.setFont(new Font("Tahoma", Font.BOLD, 30));
-        g.drawString("Bot2 sum: " + Bot2Model.getInstance().getSum(), 990, 150);
+        g.drawString("Bot2's sum: " + Bot2Model.getInstance().getSum(), 970, 150);
+        paintCPUAvatar(g, 970, 65);
+    }
+    private void paintCPUAvatar(Graphics g,int x,int y){
+        Image avatar = new ImageIcon("res/images/AVATARS/6.png").getImage();
+        g.drawImage(avatar, x, y, 60, 60, this);
     }
 
     private void paintPlayerHand(Graphics g){
@@ -139,6 +148,8 @@ public class PlayPanel extends JPanel implements Observer {
             cardImage = new ImageIcon((card.getCardImagePath())).getImage();
             g.drawImage(cardImage,(400+10+CARD_WIDTH/2)+(10+CARD_WIDTH/2)*(i), 565,CARD_WIDTH,CARD_HEIGHT, this);
         }
+        Image avatar = new ImageIcon("res/images/AVATARS/"+ ProfileManager.getInstance().getSelectedProfile().getAvatarID() + ".png").getImage();
+        g.drawImage(avatar, 340, 500, 60, 60, this);
     }
     private void paintBot1Hand(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
@@ -185,7 +196,7 @@ public class PlayPanel extends JPanel implements Observer {
     private void paintPlayerSum(Graphics g){
         g.setColor(Color.WHITE);
         g.setFont(new Font("Tahoma", Font.BOLD, 30));
-        g.drawString("Player sum: " + PlayerModel.getInstance().getSum(), 400, 550);
+        g.drawString(ProfileManager.getInstance().getSelectedProfile().getUsername()+"'s sum:" + PlayerModel.getInstance().getSum(), 400, 550);
     }
     private void paintTitle(Graphics g){
         g.setColor(Color.WHITE);

@@ -192,7 +192,7 @@ public class ProfileSelectionPanel extends JPanel {
 
             ImageIcon avatarIm = new ImageIcon("res/images/AVATARS/"+ ProfileManager.getInstance().getProfile(profileIndex).getAvatarID() + ".png");
             avatarLabel.setIcon(avatarIm);
-            avatarLabel.setBounds(500, 300, avatarIm.getIconWidth(), avatarIm.getIconHeight());
+            avatarLabel.setBounds(535, 300, avatarIm.getIconWidth(), avatarIm.getIconHeight());
             add(avatarLabel);
         }
         private void initAvatars(){

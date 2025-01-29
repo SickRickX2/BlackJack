@@ -16,9 +16,12 @@ public class ProfileManager {
             }
         }
         if (profiles.size() == 0) {
-            createProfile("Player", 0);
-            createProfile("Bot1", 1);
-            createProfile("Bot2", 2);
+            createProfile("Rick", 0);
+            createProfile("Asuka", 1);
+            createProfile("Shinji", 2);
+            createProfile("Rei", 3);
+            createProfile("Mari", 4);
+            createProfile("Eva-01", 5);
 
         }
 
@@ -63,4 +66,7 @@ public class ProfileManager {
     }
 
 
+    public Profile getSelectedProfile() {
+        return selectedProfile;
+    }
 }
