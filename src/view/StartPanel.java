@@ -23,7 +23,7 @@ public class StartPanel extends JPanel{
             setPanelSize();
             super.paintComponent(g);
             int density = 50;
-            g.setColor(Color.decode("#CC7A92"));
+            g.setColor(new Color(14, 125, 125));
             for (int x = 0; x <= getWidth() + getHeight(); x += density) g.drawLine(x, 0, 0, x);
             this.setBackground(Color.BLACK);
 
@@ -32,8 +32,8 @@ public class StartPanel extends JPanel{
             JButton startButton = new JButton("START");
             startButton.addActionListener(e -> navigator.navigate(Screen.PROFILE_SELECTION));
             startButton.setBounds(500, 500, 200, 50);
-            startButton.setBackground(Color.decode("#CC7A92"));
-            startButton.setForeground(Color.BLACK);
+            startButton.setBackground(new Color(14, 125, 125));
+            startButton.setForeground(Color.WHITE);
             startButton.setFont(new Font("Tahoma", Font.BOLD, 30));
             startButton.setFocusPainted(false);
             add(startButton);
@@ -45,8 +45,8 @@ public class StartPanel extends JPanel{
             quitButton.addActionListener(e -> System.exit(0));
 
             quitButton.setBounds(500, 600, 200, 50);
-            quitButton.setBackground(Color.decode("#CC7A92"));
-            quitButton.setForeground(Color.BLACK);
+            quitButton.setBackground(Color.RED);
+            quitButton.setForeground(Color.WHITE);
             quitButton.setFont(new Font("Tahoma", Font.BOLD, 30));
             quitButton.setFocusPainted(false);
             add(quitButton);

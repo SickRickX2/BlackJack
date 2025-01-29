@@ -111,6 +111,13 @@ public class PlayPanel extends JPanel implements Observer {
         CardModel card = DealerModel.getInstance().getHand().get(0);
         Image cardImage = new ImageIcon((card.getCardImagePath())).getImage();
         g.drawImage(cardImage, 400, 20,CARD_WIDTH,CARD_HEIGHT, this);
+        drawDealerSum(g);
+    }
+
+    private void drawDealerSum(Graphics g) {
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Tahoma", Font.BOLD, 30));
+        g.drawString("Dealer sum: " + DealerModel.getInstance().getSum(), 400, 220);
     }
 
     private void paintPlayerHand(Graphics g){
