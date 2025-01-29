@@ -15,6 +15,13 @@ public class ProfileManager {
                 profiles.add(Profile.loadProfile(file.getPath()));
             }
         }
+        if (profiles.size() == 0) {
+            createProfile("Player", 0);
+            createProfile("Bot1", 1);
+            createProfile("Bot2", 2);
+
+        }
+
     }
     public static ProfileManager getInstance() {
         if(instance == null) {
@@ -30,16 +37,29 @@ public class ProfileManager {
         selectedProfile = profile;
     }
 
-    public void selectProfile(String username) {
-        for(Profile profile : profiles) {
-            if(profile.getUsername().equals(username)) {
-                selectedProfile = profile;
-                return;
-            }
-        }
+    public void selectProfile(int index) {
+        selectedProfile = profiles.get(index);
+    }
+
+    public int getProfilesSize() {
+        return profiles.size();
+    }
+    public Profile getProfile(int index) {
+        return profiles.get(index);
     }
     public void saveSelectedProfile() {
         selectedProfile.saveProfile();
+    }
+    public void winCounter(){
+        selectedProfile.increaseNumberOfPlayedGames();
+        selectedProfile.increaseNumberOfWins();
+        saveSelectedProfile();
+
+    }
+    public void gameCounter(){
+        selectedProfile.increaseNumberOfPlayedGames();
+        saveSelectedProfile();
+
     }
 
 

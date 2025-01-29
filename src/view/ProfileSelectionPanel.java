@@ -1,15 +1,21 @@
 package view;
 
 import model.TurnManager;
+import model.profiles.ProfileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class ProfileSelectionPanel extends JPanel {
         private Navigator navigator;
         private JButton bot0Button;
         private JButton bot1Button;
         private JButton bot2Button;
+        private int profileIndex = 0;
+        private JLabel profileLabel = new JLabel(ProfileManager.getInstance().getProfile(0).getUsername());
+        private JLabel avatarLabel = new JLabel();
+        private ArrayList<ImageIcon> avatars;
 
 
         public ProfileSelectionPanel(Navigator navigator) {
@@ -17,14 +23,19 @@ public class ProfileSelectionPanel extends JPanel {
 
             setPanelSize();
             setLayout(null);
+            initAvatars();
             createTitle();
+            initAvatars();
             createPlayButton();
             createQuitButton();
             //createProfileButton();
             createBot0Button();
             createBot1Button();
             createBot2Button();
+            createRightArrow();
+            createLeftArrow();
             cpuTitle();
+            printProfile();
 
         }
         private void setPanelSize() {
@@ -42,7 +53,9 @@ public class ProfileSelectionPanel extends JPanel {
         }
         protected void createPlayButton(){
             JButton startButton = new JButton("PLAY");
-            startButton.addActionListener(e -> {navigator.navigate(Screen.PLAY);
+            startButton.addActionListener(e -> {
+                ProfileManager.getInstance().selectProfile(profileIndex);
+                navigator.navigate(Screen.PLAY);
                 TurnManager.getInstance().createBot();});
             startButton.setBounds(500, 500, 200, 50);
             startButton.setBackground(new Color(14, 125, 125));
@@ -117,7 +130,6 @@ public class ProfileSelectionPanel extends JPanel {
 
 
 
-
         protected void createQuitButton(){
             JButton quitButton = new JButton("MENU");
             quitButton.addActionListener(e -> navigator.navigate(Screen.START));
@@ -137,6 +149,59 @@ public class ProfileSelectionPanel extends JPanel {
             titleLabel.setForeground(Color.WHITE);
             add(titleLabel);
         }
+
+        private void createRightArrow(){
+            JButton rightArrow = new JButton(">");
+            rightArrow.addActionListener(e -> {
+                profileIndex++;
+                if(profileIndex >= ProfileManager.getInstance().getProfilesSize()){
+                    profileIndex = 0;
+                }
+                printProfile();
+
+            });
+            rightArrow.setBounds(800, 400, 80, 50);
+            rightArrow.setFont(new Font("Tahoma", Font.BOLD, 30));
+            rightArrow.setForeground(new Color (14, 125, 125));
+            rightArrow.setBackground(Color.WHITE);
+            rightArrow.setFocusPainted(false);
+            add(rightArrow);
+        }
+        private void createLeftArrow(){
+            JButton leftArrow = new JButton("<");
+            leftArrow.addActionListener(e -> {
+                profileIndex--;
+                if(profileIndex < 0){
+                    profileIndex = ProfileManager.getInstance().getProfilesSize() - 1;
+                }
+                printProfile();
+            });
+            leftArrow.setBounds(320, 400, 80, 50);
+            leftArrow.setFont(new Font("Tahoma", Font.BOLD, 30));
+            leftArrow.setForeground(new Color (14, 125, 125));
+            leftArrow.setBackground(Color.WHITE);
+            leftArrow.setFocusPainted(false);
+            add(leftArrow);
+        }
+        private void printProfile(){
+            profileLabel.setText(ProfileManager.getInstance().getProfile(profileIndex).getUsername());
+            profileLabel.setBounds(470, 250, 300, 50);
+            profileLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
+            profileLabel.setForeground(Color.WHITE);
+            add(profileLabel);
+
+            ImageIcon avatarIm = new ImageIcon("res/images/AVATARS/"+ ProfileManager.getInstance().getProfile(profileIndex).getAvatarID() + ".png");
+            avatarLabel.setIcon(avatarIm);
+            avatarLabel.setBounds(500, 300, avatarIm.getIconWidth(), avatarIm.getIconHeight());
+            add(avatarLabel);
+        }
+        private void initAvatars(){
+            avatars = new ArrayList<>();
+            for(int i = 0; i < 6; i++){
+                avatars.add(new ImageIcon("res/images/AVATARS" + i + ".png"));
+            }
+        }
+
 
 
 }
