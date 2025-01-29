@@ -1,8 +1,6 @@
 package view;
 
-import model.CardModel;
-import model.DealerModel;
-import model.PlayerModel;
+import model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,13 +24,24 @@ public class PlayPanel extends JPanel implements Observer {
     protected void paintComponent(Graphics g) {
         setPanelSize();
         super.paintComponent(g);
+        paintTitle(g);
         paintDealerHand(g);
         paintPlayerHand(g);
-        this.setBackground(new Color(14, 14, 125));
+        paintPlayerSum(g);
+
+        if (TurnManager.getInstance().getBotCount() > 0) {
+            paintBot1Hand(g);
+        }
+        if (TurnManager.getInstance().getBotCount() > 1) {
+            paintBot2Hand(g);
+        }
+
+
+        this.setBackground(new Color(14, 125, 125));
     }
 
     private void setPanelSize() {
-        Dimension size = new Dimension(1200,800);
+        Dimension size = new Dimension(WindowDimensions.WIDTH, WindowDimensions.HEIGHT);
         setPreferredSize(size);
     }
 
@@ -82,7 +91,7 @@ public class PlayPanel extends JPanel implements Observer {
 
     private void paintHiddenCard(Graphics g){
         Image hiddenCard = new ImageIcon("res/images/cards/BACK.png").getImage();
-        g.drawImage(hiddenCard, 255, 20,CARD_WIDTH,CARD_HEIGHT, this);
+        g.drawImage(hiddenCard, 400, 20,CARD_WIDTH,CARD_HEIGHT, this);
     }
 
     private void paintDealerHand(Graphics g){
@@ -94,25 +103,75 @@ public class PlayPanel extends JPanel implements Observer {
         for (int i = 1; i < DealerModel.getInstance().getHand().size(); i++){
             CardModel card = DealerModel.getInstance().getHand().get(i);
             Image cardImage = new ImageIcon((card.getCardImagePath())).getImage();
-            g.drawImage(cardImage,(255+10+CARD_WIDTH/2)+(10+CARD_WIDTH/2)*(i), 20,CARD_WIDTH,CARD_HEIGHT, this);
+            g.drawImage(cardImage,(400+10+CARD_WIDTH/2)+(10+CARD_WIDTH/2)*(i), 20,CARD_WIDTH,CARD_HEIGHT, this);
         }
     }
 
     private void revealHiddenCard(Graphics g){
         CardModel card = DealerModel.getInstance().getHand().get(0);
         Image cardImage = new ImageIcon((card.getCardImagePath())).getImage();
-        g.drawImage(cardImage, 255, 20,CARD_WIDTH,CARD_HEIGHT, this);
+        g.drawImage(cardImage, 400, 20,CARD_WIDTH,CARD_HEIGHT, this);
     }
 
     private void paintPlayerHand(Graphics g){
         CardModel card = PlayerModel.getInstance().getHand().getFirst();
         Image cardImage = new ImageIcon((card.getCardImagePath())).getImage();
-        g.drawImage(cardImage, 255, 565,CARD_WIDTH,CARD_HEIGHT, this);
+        g.drawImage(cardImage, 400, 565,CARD_WIDTH,CARD_HEIGHT, this);
         for (int i = 1; i < PlayerModel.getInstance().getHand().size(); i++){
             card = PlayerModel.getInstance().getHand().get(i);
             cardImage = new ImageIcon((card.getCardImagePath())).getImage();
-            g.drawImage(cardImage,(255+10+CARD_WIDTH/2)+(10+CARD_WIDTH/2)*(i), 565,CARD_WIDTH,CARD_HEIGHT, this);
+            g.drawImage(cardImage,(400+10+CARD_WIDTH/2)+(10+CARD_WIDTH/2)*(i), 565,CARD_WIDTH,CARD_HEIGHT, this);
         }
+    }
+    private void paintBot1Hand(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        CardModel card = Bot1Model.getInstance().getHand().get(0);
+        Image cardImage = new ImageIcon((card.getCardImagePath())).getImage();
+        int x0 = 40 ;
+        int y0 = CARD_HEIGHT;
+        g2d.rotate(Math.toRadians(90), x0 + CARD_WIDTH / 2, y0 + CARD_HEIGHT / 2);
+        g2d.drawImage(cardImage, x0, y0, CARD_WIDTH, CARD_HEIGHT, this);
+        g2d.rotate(Math.toRadians(-90), x0 + CARD_WIDTH / 2, y0 + CARD_HEIGHT / 2);
+
+        for (int i = 1; i < Bot1Model.getInstance().getHand().size(); i++) {
+            card = Bot1Model.getInstance().getHand().get(i);
+           cardImage = new ImageIcon((card.getCardImagePath())).getImage();
+            int x1 = 40 ;
+            int y1 =  80 + CARD_HEIGHT;
+            g2d.rotate(Math.toRadians(90), x1 + CARD_WIDTH / 2, y1 + CARD_HEIGHT / 2);
+            g2d.drawImage(cardImage, x1+CARD_WIDTH/2*(i), y1, CARD_WIDTH, CARD_HEIGHT, this);
+            g2d.rotate(Math.toRadians(-90), x1 + CARD_WIDTH / 2, y1 + CARD_HEIGHT / 2);
+        }
+    }
+    private void paintBot2Hand(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        CardModel card = Bot2Model.getInstance().getHand().get(0);
+        Image cardImage = new ImageIcon((card.getCardImagePath())).getImage();
+        int x0 = 1040 ;
+        int y0 = CARD_HEIGHT;
+        g2d.rotate(Math.toRadians(90), x0 + CARD_WIDTH / 2, y0 + CARD_HEIGHT / 2);
+        g2d.drawImage(cardImage, x0, y0, CARD_WIDTH, CARD_HEIGHT, this);
+        g2d.rotate(Math.toRadians(-90), x0 + CARD_WIDTH / 2, y0 + CARD_HEIGHT / 2);
+
+        for (int i = 1; i < Bot2Model.getInstance().getHand().size(); i++) {
+            card = Bot2Model.getInstance().getHand().get(i);
+            cardImage = new ImageIcon((card.getCardImagePath())).getImage();
+            int x1 = 1040 ;
+            int y1 =  80 + CARD_HEIGHT;
+            g2d.rotate(Math.toRadians(90), x1 + CARD_WIDTH / 2, y1 + CARD_HEIGHT / 2);
+            g2d.drawImage(cardImage, x1+CARD_WIDTH/2*(i), y1, CARD_WIDTH, CARD_HEIGHT, this);
+            g2d.rotate(Math.toRadians(-90), x1 + CARD_WIDTH / 2, y1 + CARD_HEIGHT / 2);
+        }
+    }
+    private void paintPlayerSum(Graphics g){
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Tahoma", Font.BOLD, 30));
+        g.drawString("Player sum: " + PlayerModel.getInstance().getSum(), 400, 550);
+    }
+    private void paintTitle(Graphics g){
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Tahoma", Font.BOLD, 30));
+        g.drawImage(new ImageIcon("res/images/blackjacktitle.png").getImage(), 300, 70, this);
     }
 
     @Override
