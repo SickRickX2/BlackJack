@@ -24,6 +24,7 @@ public abstract class EntityModel {
         sum += card.getCardValue();
         aceCount += card.isAce() ? 1 : 0;
         hand.add(card);
+        changeAceValue();
     }
 
     public void hit() {
