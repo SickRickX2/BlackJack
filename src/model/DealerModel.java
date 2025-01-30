@@ -1,5 +1,9 @@
 package model;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class DealerModel extends EntityModel {
     private static DealerModel instance = null;
 
@@ -24,54 +28,38 @@ public class DealerModel extends EntityModel {
 
     @Override
     public void hit() {
-        if (TurnManager.getInstance().getBotCount() == 0){
-            if(PlayerModel.getInstance().getSum() < sum){
-                endTurn();
+        Timer timer = new Timer(2000, new ActionListener() { // 1 second delay
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (TurnManager.getInstance().getBotCount() == 0) {
+                    if (PlayerModel.getInstance().getSum() < sum) {
+                        endTurn();
+                    } else if (PlayerModel.getInstance().busts) {
+                        endTurn();
+                    } else while (PlayerModel.getInstance().getSum() <= 21 && PlayerModel.getInstance().getSum() > sum) {
+                        DealerModel.super.hit();
+                    }
+                } else if (TurnManager.getInstance().getBotCount() == 1) {
+                    if (PlayerModel.getInstance().getSum() < sum && Bot1Model.getInstance().getSum() < sum) {
+                        endTurn();
+                    } else if (PlayerModel.getInstance().busts && Bot1Model.getInstance().busts) {
+                        endTurn();
+                    } else while ((PlayerModel.getInstance().getSum() <= 21 && PlayerModel.getInstance().getSum() > sum) || (Bot1Model.getInstance().getSum() <= 21 && Bot1Model.getInstance().getSum() > sum)) {
+                        DealerModel.super.hit();
+                    }
+                } else if (TurnManager.getInstance().getBotCount() == 2) {
+                    if (PlayerModel.getInstance().getSum() < sum && Bot1Model.getInstance().getSum() < sum && Bot2Model.getInstance().getSum() < sum) {
+                        endTurn();
+                    } else if (PlayerModel.getInstance().busts && Bot1Model.getInstance().busts && Bot2Model.getInstance().busts) {
+                        endTurn();
+                    } else while ((PlayerModel.getInstance().getSum() <= 21 && PlayerModel.getInstance().getSum() > sum) || (Bot1Model.getInstance().getSum() <= 21 && Bot1Model.getInstance().getSum() > sum) || (Bot2Model.getInstance().getSum() <= 21 && Bot2Model.getInstance().getSum() > sum)) {
+                        DealerModel.super.hit();
+                    }
+                }
             }
-            else if (PlayerModel.getInstance().busts){
-                endTurn();
-            }
-            else while (PlayerModel.getInstance().getSum() <= 21 && PlayerModel.getInstance().getSum() > sum){
-                super.hit();
-            }
-        }
-        else if (TurnManager.getInstance().getBotCount() == 1){
-            if(PlayerModel.getInstance().getSum() < sum && Bot1Model.getInstance().getSum() < sum){
-                endTurn();
-            }
-            else if (PlayerModel.getInstance().busts && Bot1Model.getInstance().busts){
-                endTurn();
-            }
-            else while ((PlayerModel.getInstance().getSum() <= 21 && PlayerModel.getInstance().getSum() > sum) || (Bot1Model.getInstance().getSum() <= 21 && Bot1Model.getInstance().getSum() > sum)){
-                super.hit();
-            }
-        }
-        else if (TurnManager.getInstance().getBotCount() == 2){
-            if(PlayerModel.getInstance().getSum() < sum && Bot1Model.getInstance().getSum() < sum && Bot2Model.getInstance().getSum() < sum){
-                endTurn();
-            }
-            else if (PlayerModel.getInstance().busts && Bot1Model.getInstance().busts && Bot2Model.getInstance().busts){
-                endTurn();
-            }
-            else while ((PlayerModel.getInstance().getSum() <= 21 && PlayerModel.getInstance().getSum() > sum) || (Bot1Model.getInstance().getSum() <= 21 && Bot1Model.getInstance().getSum() > sum) || (Bot2Model.getInstance().getSum() <= 21 && Bot2Model.getInstance().getSum() > sum)){
-                super.hit();
-            }
-        }
-
-
-
-
-//        if (PlayerModel.getInstance().sum < sum && Bot1Model.getInstance().sum < sum && Bot2Model.getInstance().sum < sum){
-//            endTurn();
-//        }
-//        else
-//        if ((PlayerModel.getInstance().busts && TurnManager.getInstance().getBotCount() == 0)|| ((PlayerModel.getInstance().busts && Bot1Model.getInstance().busts && TurnManager.getInstance().getBotCount() == 1)) || ((PlayerModel.getInstance().busts && Bot1Model.getInstance().busts && Bot2Model.getInstance().busts && TurnManager.getInstance().getBotCount() == 2))){
-//            endTurn();
-//            }
-//        else while ((PlayerModel.getInstance().getSum() <= 21 && PlayerModel.getInstance().getSum() > sum) || (Bot1Model.getInstance().getSum() <= 21 && Bot1Model.getInstance().getSum() > sum) || (Bot2Model.getInstance().getSum() <= 21 && Bot2Model.getInstance().getSum() > sum)){
-//            super.hit();
-//        }
-
+        });
+        timer.setRepeats(false);
+        timer.start();
     }
 
     @Override

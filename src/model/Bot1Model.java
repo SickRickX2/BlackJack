@@ -1,5 +1,9 @@
 package model;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class Bot1Model extends EntityModel {
     private static Bot1Model instance = null;
     private Bot1Model() {
@@ -13,10 +17,16 @@ public class Bot1Model extends EntityModel {
     }
     @Override
     public void hit() {
-        while(sum < 17){
-            super.hit();
-        }
-
+        Timer timer = new Timer(1000, new ActionListener() { // 1 second delay
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                while (sum < 17) {
+                    Bot1Model.super.hit();
+                }
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();
     }
 
     @Override
