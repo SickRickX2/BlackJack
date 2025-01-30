@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class LosePanel extends JPanel {
-    public LosePanel() {
+    public LosePanel(Navigator navigator) {
         JLabel label = new JLabel("You lose!");
         add(label);
         createQuitButton();

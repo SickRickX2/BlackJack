@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class WinPanel extends JPanel {
-    public WinPanel() {
+    public WinPanel(Navigator navigator) {
         JLabel label = new JLabel("You win!");
         add(label);
         createQuitButton();

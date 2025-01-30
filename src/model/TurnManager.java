@@ -1,11 +1,14 @@
 package model;
 
+import model.profiles.ProfileManager;
+
 import java.util.Observable;
 
 public class TurnManager extends Observable {
     private static TurnManager instance = null;
     private Turn currentTurn = Turn.PLAYER;
     private int botCount = 0;
+    public boolean win = false , lose= false, tie = false;
 
     private TurnManager() {
     }
@@ -38,7 +41,6 @@ public class TurnManager extends Observable {
             setChanged();
             notifyObservers();
             Bot1Model.getInstance().hit();
-            System.out.println("Bot1: " + Bot1Model.getInstance().getSum());
         } else if (currentTurn == Turn.PLAYER && botCount == 0) {
             currentTurn = Turn.DEALER;
             setChanged();
@@ -62,6 +64,11 @@ public class TurnManager extends Observable {
         if (currentTurn == Turn.DEALER) {
             currentTurn = Turn.END;
         }
+        if (currentTurn == Turn.END) {
+            String result = checkGameResult();
+            setChanged();
+            notifyObservers(result);
+        }
     }
 
     public Turn getCurrentTurn() {
@@ -78,5 +85,35 @@ public class TurnManager extends Observable {
 
     public void setBotCount(int botCount) {
         this.botCount = botCount;
+    }
+    private String checkGameResult() {
+        if (PlayerModel.getInstance().blackjack && DealerModel.getInstance().blackjack) {
+            ProfileManager.getInstance().gameCounter();
+            return "TIE";
+        } else if (PlayerModel.getInstance().blackjack && !DealerModel.getInstance().blackjack) {
+            ProfileManager.getInstance().winCounter();
+            ProfileManager.getInstance().gameCounter();
+            return "WIN";
+        } else if (!PlayerModel.getInstance().blackjack && DealerModel.getInstance().blackjack) {
+            ProfileManager.getInstance().gameCounter();
+            return "LOSE";
+        } else if (PlayerModel.getInstance().getSum() > 21) {
+            ProfileManager.getInstance().gameCounter();
+            return "LOSE";
+        } else if (DealerModel.getInstance().getSum() > 21) {
+            ProfileManager.getInstance().winCounter();
+            ProfileManager.getInstance().gameCounter();
+            return "WIN";
+        } else if (PlayerModel.getInstance().getSum() > DealerModel.getInstance().getSum()) {
+            ProfileManager.getInstance().winCounter();
+            ProfileManager.getInstance().gameCounter();
+            return "WIN";
+        } else if (PlayerModel.getInstance().getSum() < DealerModel.getInstance().getSum()) {
+            ProfileManager.getInstance().gameCounter();
+            return "LOSE";
+        } else {
+            ProfileManager.getInstance().gameCounter();
+            return "TIE";
+        }
     }
 }

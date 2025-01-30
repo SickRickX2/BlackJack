@@ -5,6 +5,8 @@ import model.profiles.ProfileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -19,6 +21,7 @@ public class PlayPanel extends JPanel implements Observer {
         setLayout(new BorderLayout());
         setBackground(Color.BLACK);
         createButtons();
+        TurnManager.getInstance().addObserver(this);
 
     }
 
@@ -29,6 +32,7 @@ public class PlayPanel extends JPanel implements Observer {
         paintDealerHand(g);
         paintPlayerHand(g);
         paintPlayerSum(g);
+
 
         if (TurnManager.getInstance().getBotCount() > 0) {
             paintBot1Hand(g);
@@ -203,9 +207,35 @@ public class PlayPanel extends JPanel implements Observer {
         g.setFont(new Font("Tahoma", Font.BOLD, 30));
         g.drawImage(new ImageIcon("res/images/blackjacktitle.png").getImage(), 300, 70, this);
     }
+    private void switchToResultPanel(boolean win, boolean tie, boolean lose){
+        int delay = 2000;
+        ActionListener taskPerformer = new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                if (win) navigator.navigate(Screen.WIN);
+                if (tie) navigator.navigate(Screen.TIE);
+                if (lose) navigator.navigate(Screen.LOSE);
+            }
+        };
+        Timer timer = new Timer(delay, taskPerformer);
+        timer.setRepeats(false);
+        timer.start();
+    }
 
     @Override
     public void update(Observable o, Object arg) {
-        disableButtons();
-    }
-}
+        if (arg instanceof String result) {
+            switch (result) {
+                case "WIN":
+                    switchToResultPanel(true, false, false);
+                    break;
+                case "TIE":
+                    switchToResultPanel(false, true, false);
+                    break;
+                case "LOSE":
+                    switchToResultPanel(false, false, true);
+                    break;
+            }
+        } else {
+            disableButtons();
+        }
+    }}

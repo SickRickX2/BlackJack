@@ -10,5 +10,5 @@ class Navigator extends Observable {
 }
 
 enum Screen {
-    START, PROFILE_SELECTION, PLAY, WIN, LOSE;
+    START, PROFILE_SELECTION, PLAY, WIN, LOSE,TIE;
 }
