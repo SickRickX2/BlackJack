@@ -185,7 +185,7 @@ public class ProfileSelectionPanel extends JPanel {
         }
         private void printProfile(){
             profileLabel.setText(ProfileManager.getInstance().getProfile(profileIndex).getUsername());
-            profileLabel.setBounds(470, 250, 300, 50);
+            profileLabel.setBounds(550, 250, 300, 50);
             profileLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
             profileLabel.setForeground(Color.WHITE);
             add(profileLabel);
