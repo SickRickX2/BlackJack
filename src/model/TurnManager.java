@@ -95,25 +95,28 @@ public class TurnManager extends Observable {
         if (playerBlackjack && dealerBlackjack) {
             ProfileManager.getInstance().gameCounter();
             return "TIE";
-        } else if (playerBlackjack) {
+        } else if (playerBlackjack && !dealerBlackjack) {
             ProfileManager.getInstance().winCounter();
             ProfileManager.getInstance().gameCounter();
             return "WIN";
-        } else if (dealerBlackjack) {
+        } else if (dealerBlackjack && !playerBlackjack) {
             ProfileManager.getInstance().gameCounter();
             return "LOSE";
         } else if (playerSum > 21) {
             ProfileManager.getInstance().gameCounter();
             return "LOSE";
-        } else if (dealerSum > 21) {
+        } else if (dealerSum > 21  && playerSum <= 21) {
             ProfileManager.getInstance().winCounter();
             ProfileManager.getInstance().gameCounter();
             return "WIN";
-        } else if (playerSum > dealerSum) {
+        } else if (playerSum == 21 && dealerSum == 21) {
+            ProfileManager.getInstance().gameCounter();
+            return "TIE";
+        } else if (playerSum > dealerSum && playerSum <= 21) {
             ProfileManager.getInstance().winCounter();
             ProfileManager.getInstance().gameCounter();
             return "WIN";
-        } else if (playerSum < dealerSum) {
+        } else if (playerSum < dealerSum && dealerSum <= 21) {
             ProfileManager.getInstance().gameCounter();
             return "LOSE";
         } else {

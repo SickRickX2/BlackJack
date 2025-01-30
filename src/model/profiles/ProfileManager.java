@@ -2,6 +2,7 @@ package model.profiles;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProfileManager {
     private static ProfileManager instance = null;
@@ -68,5 +69,9 @@ public class ProfileManager {
 
     public Profile getSelectedProfile() {
         return selectedProfile;
+    }
+
+    public List<Profile> getProfiles() {
+        return profiles;
     }
 }

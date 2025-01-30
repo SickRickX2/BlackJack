@@ -66,7 +66,7 @@ public class Profile implements Serializable {
     public void setAvatarID(int avatarID) {
         this.avatarID = avatarID;
     }
-    public int getNumberOfWins() {
+    public int getWins() {
         return numberOfWins;
     }
     public void increaseNumberOfWins() {
