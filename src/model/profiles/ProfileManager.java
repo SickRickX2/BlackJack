@@ -60,7 +60,6 @@ public class ProfileManager {
     }
 
     public void winCounter() {
-        selectedProfile.increaseNumberOfPlayedGames();
         selectedProfile.increaseNumberOfWins();
         saveSelectedProfile();
 
