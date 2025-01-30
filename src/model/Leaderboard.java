@@ -17,6 +17,7 @@ public class Leaderboard {
                 .mapToObj(profileManager::getProfile)
                 .collect(Collectors.toList());
     }
+
     public static Leaderboard getInstance() {
         if (instance == null) {
             instance = new Leaderboard();

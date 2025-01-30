@@ -19,44 +19,50 @@ public abstract class EntityModel {
 
     }
 
-    protected void drawCard(){
+    protected void drawCard() {
         CardModel card = DeckModel.getInstance().getCard();
         sum += card.getCardValue();
         aceCount += card.isAce() ? 1 : 0;
         hand.add(card);
     }
-    public void hit(){
+
+    public void hit() {
         drawCard();
         changeAceValue();
         bustsCheck();
 
     }
-    public void stay(){
+
+    public void stay() {
         TurnManager.getInstance().nextTurn();
     }
-    public ArrayList<CardModel> getHand(){
-       return hand;
+
+    public ArrayList<CardModel> getHand() {
+        return hand;
     }
-    public int getSum(){
+
+    public int getSum() {
         return sum;
     }
-    public int getAceCount(){
-        return aceCount;
-    }
-    public void changeAceValue(){
-        while(sum > 21 && aceCount > 0){
+
+
+    public void changeAceValue() {
+        while (sum > 21 && aceCount > 0) {
             sum -= 10;
             aceCount--;
         }
     }
-    public  void blackjackCheck(){
-        if (sum == 21 && hand.size() == 2){
+
+    public void blackjackCheck() {
+        if (sum == 21 && hand.size() == 2) {
             blackjack = true;
         }
     }
-    public void endTurn(){
+
+    public void endTurn() {
         TurnManager.getInstance().nextTurn();
     }
+
     public abstract void bustsCheck();
 
 }

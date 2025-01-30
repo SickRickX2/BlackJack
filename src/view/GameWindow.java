@@ -47,13 +47,14 @@ public class GameWindow extends JFrame implements Observer {
                 add(new ProfileSelectionPanel(navigator), Screen.PROFILE_SELECTION.name());
                 add(playPanel, Screen.PLAY.name());
                 add(new WinPanel(navigator), Screen.WIN.name());
-                add(new LosePanel(navigator), Screen.LOSE.name());
+                add(new LosePanel(), Screen.LOSE.name());
                 add(new TiePanel(navigator), Screen.TIE.name());
             }
         };
 
-    add(deck);
+        add(deck);
     }
+
     public PlayPanel getPlayPanel() {
         return playPanel;
     }

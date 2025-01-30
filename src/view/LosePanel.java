@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.List;
 
 public class LosePanel extends JPanel {
-    public LosePanel(Navigator navigator) {
+    public LosePanel() {
         setPreferredSize(new Dimension(WindowDimensions.WIDTH, WindowDimensions.HEIGHT));
         setLayout(new GridLayout(0, 1));
         JLabel label = new JLabel("You lose!", SwingConstants.CENTER);

@@ -7,6 +7,7 @@ public class Profile implements Serializable {
     private int avatarID;
     private int numberOfWins;
     private int numberOfPlayedGames;
+
     public Profile(int avatarID, String username) {
         this.username = username;
         this.avatarID = avatarID;
@@ -17,7 +18,7 @@ public class Profile implements Serializable {
 
     public void saveProfile() {
         try {
-            FileOutputStream fileOut = new FileOutputStream("res/profiles/" + username+ ".rl");
+            FileOutputStream fileOut = new FileOutputStream("res/profiles/" + username + ".rl");
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
             objectOut.writeObject(username);
             objectOut.writeObject(avatarID);
@@ -30,6 +31,7 @@ public class Profile implements Serializable {
         }
 
     }
+
     public static Profile loadProfile(String filename) {
         try {
             FileInputStream fileIn = new FileInputStream(filename);
@@ -52,29 +54,34 @@ public class Profile implements Serializable {
     }
 
 
-
-
     public String getUsername() {
         return username;
     }
+
     public void setUsername(String username) {
         this.username = username;
     }
+
     public int getAvatarID() {
         return avatarID;
     }
+
     public void setAvatarID(int avatarID) {
         this.avatarID = avatarID;
     }
+
     public int getWins() {
         return numberOfWins;
     }
+
     public void increaseNumberOfWins() {
-       numberOfWins++;
+        numberOfWins++;
     }
+
     public int getNumberOfPlayedGames() {
         return numberOfPlayedGames;
     }
+
     public void increaseNumberOfPlayedGames() {
         numberOfPlayedGames++;
     }

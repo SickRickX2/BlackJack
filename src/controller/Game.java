@@ -12,9 +12,8 @@ public class Game implements Runnable {
 
     private static GameWindow gameWindow;
     private Thread gameThread;
-    private int FPS_SET = 60;
+    private final int FPS_SET = 60;
     private final int UPS_SET = 60;
-
 
 
     public Game() {
@@ -24,6 +23,7 @@ public class Game implements Runnable {
         startGameLoop();
 
     }
+
     private void initClasses() {
         ProfileManager.getInstance();
         TurnManager.getInstance();
@@ -38,6 +38,7 @@ public class Game implements Runnable {
         gameThread = new Thread(this);
         gameThread.start();
     }
+
     @Override
     public void run() {
         double timePerFrame = 1000000000.0 / FPS_SET;
@@ -52,13 +53,13 @@ public class Game implements Runnable {
         double deltaU = 0;
         double deltaF = 0;
 
-        while(true) {
+        while (true) {
             long currentTime = System.nanoTime();
 
             deltaU += (currentTime - previousTime) / timePerUpdate;
             deltaF += (currentTime - previousTime) / timePerFrame;
             previousTime = currentTime;
-            if(deltaU >= 1) {
+            if (deltaU >= 1) {
 
                 updates++;
                 deltaU--;

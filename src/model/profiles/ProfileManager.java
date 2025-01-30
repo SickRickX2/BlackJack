@@ -8,11 +8,12 @@ public class ProfileManager {
     private static ProfileManager instance = null;
     private ArrayList<Profile> profiles;
     private Profile selectedProfile;
+
     public ProfileManager() {
 
         profiles = new ArrayList<>();
-        for(File file : new File("res/profiles/").listFiles()) {
-            if(file.isFile()) {
+        for (File file : new File("res/profiles/").listFiles()) {
+            if (file.isFile()) {
                 profiles.add(Profile.loadProfile(file.getPath()));
             }
         }
@@ -27,8 +28,9 @@ public class ProfileManager {
         }
 
     }
+
     public static ProfileManager getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new ProfileManager();
         }
         return instance;
@@ -48,19 +50,23 @@ public class ProfileManager {
     public int getProfilesSize() {
         return profiles.size();
     }
+
     public Profile getProfile(int index) {
         return profiles.get(index);
     }
+
     public void saveSelectedProfile() {
         selectedProfile.saveProfile();
     }
-    public void winCounter(){
+
+    public void winCounter() {
         selectedProfile.increaseNumberOfPlayedGames();
         selectedProfile.increaseNumberOfWins();
         saveSelectedProfile();
 
     }
-    public void gameCounter(){
+
+    public void gameCounter() {
         selectedProfile.increaseNumberOfPlayedGames();
         saveSelectedProfile();
 

@@ -8,13 +8,12 @@ public class TurnManager extends Observable {
     private static TurnManager instance = null;
     private Turn currentTurn = Turn.PLAYER;
     private int botCount = 0;
-    public boolean win = false , lose= false, tie = false;
 
     private TurnManager() {
     }
 
     public void createBot() {
-        switch(botCount) {
+        switch (botCount) {
             case 1:
                 Bot1Model.getInstance();
                 break;
@@ -86,6 +85,7 @@ public class TurnManager extends Observable {
     public void setBotCount(int botCount) {
         this.botCount = botCount;
     }
+
     private String checkGameResult() {
         int playerSum = PlayerModel.getInstance().getSum();
         int dealerSum = DealerModel.getInstance().getSum();
@@ -105,7 +105,7 @@ public class TurnManager extends Observable {
         } else if (playerSum > 21) {
             ProfileManager.getInstance().gameCounter();
             return "LOSE";
-        } else if (dealerSum > 21  && playerSum <= 21) {
+        } else if (dealerSum > 21 && playerSum <= 21) {
             ProfileManager.getInstance().winCounter();
             ProfileManager.getInstance().gameCounter();
             return "WIN";

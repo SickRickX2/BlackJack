@@ -2,6 +2,7 @@ package model;
 
 public class Bot1Model extends EntityModel {
     private static Bot1Model instance = null;
+
     private Bot1Model() {
     }
 
@@ -11,6 +12,7 @@ public class Bot1Model extends EntityModel {
         }
         return instance;
     }
+
     @Override
     public void hit() {
         while (sum < 17) {

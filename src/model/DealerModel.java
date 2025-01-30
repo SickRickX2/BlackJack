@@ -4,19 +4,21 @@ public class DealerModel extends EntityModel {
     private static DealerModel instance = null;
 
     private boolean hidden = true;
-    private DealerModel(){
+
+    private DealerModel() {
 
 
     }
-    public static DealerModel getInstance(){
-        if(instance == null){
+
+    public static DealerModel getInstance() {
+        if (instance == null) {
             instance = new DealerModel();
         }
         return instance;
     }
 
-    public boolean isHidden(){
-        if (TurnManager.getInstance().getCurrentTurn() == TurnManager.Turn.DEALER || TurnManager.getInstance().getCurrentTurn() == TurnManager.Turn.END){
+    public boolean isHidden() {
+        if (TurnManager.getInstance().getCurrentTurn() == TurnManager.Turn.DEALER || TurnManager.getInstance().getCurrentTurn() == TurnManager.Turn.END) {
             hidden = false;
         }
         return hidden;
