@@ -208,7 +208,7 @@ public class PlayPanel extends JPanel implements Observer {
         g.drawImage(new ImageIcon("res/images/blackjacktitle.png").getImage(), 300, 70, this);
     }
     private void switchToResultPanel(boolean win, boolean tie, boolean lose){
-        int delay = 5000;
+        int delay = 4000;
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 if (win) navigator.navigate(Screen.WIN);

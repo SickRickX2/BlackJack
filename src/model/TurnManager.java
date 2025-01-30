@@ -87,28 +87,33 @@ public class TurnManager extends Observable {
         this.botCount = botCount;
     }
     private String checkGameResult() {
-        if (PlayerModel.getInstance().blackjack && DealerModel.getInstance().blackjack) {
+        int playerSum = PlayerModel.getInstance().getSum();
+        int dealerSum = DealerModel.getInstance().getSum();
+        boolean playerBlackjack = PlayerModel.getInstance().blackjack;
+        boolean dealerBlackjack = DealerModel.getInstance().blackjack;
+
+        if (playerBlackjack && dealerBlackjack) {
             ProfileManager.getInstance().gameCounter();
             return "TIE";
-        } else if (PlayerModel.getInstance().blackjack && !DealerModel.getInstance().blackjack) {
+        } else if (playerBlackjack) {
             ProfileManager.getInstance().winCounter();
             ProfileManager.getInstance().gameCounter();
             return "WIN";
-        } else if (!PlayerModel.getInstance().blackjack && DealerModel.getInstance().blackjack) {
+        } else if (dealerBlackjack) {
             ProfileManager.getInstance().gameCounter();
             return "LOSE";
-        } else if (PlayerModel.getInstance().getSum() > 21) {
+        } else if (playerSum > 21) {
             ProfileManager.getInstance().gameCounter();
             return "LOSE";
-        } else if (DealerModel.getInstance().getSum() > 21 && PlayerModel.getInstance().getSum() <= 21) {
+        } else if (dealerSum > 21) {
             ProfileManager.getInstance().winCounter();
             ProfileManager.getInstance().gameCounter();
             return "WIN";
-        } else if (PlayerModel.getInstance().getSum() > DealerModel.getInstance().getSum() && PlayerModel.getInstance().getSum() <= 21) {
+        } else if (playerSum > dealerSum) {
             ProfileManager.getInstance().winCounter();
             ProfileManager.getInstance().gameCounter();
             return "WIN";
-        } else if (PlayerModel.getInstance().getSum() < DealerModel.getInstance().getSum() && DealerModel.getInstance().getSum() <= 21) {
+        } else if (playerSum < dealerSum) {
             ProfileManager.getInstance().gameCounter();
             return "LOSE";
         } else {
