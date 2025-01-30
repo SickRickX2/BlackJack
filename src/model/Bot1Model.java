@@ -17,7 +17,7 @@ public class Bot1Model extends EntityModel {
     }
     @Override
     public void hit() {
-        Timer timer = new Timer(1000, new ActionListener() { // 1 second delay
+        Timer timer = new Timer(200, new ActionListener() { // 1 second delay
             @Override
             public void actionPerformed(ActionEvent e) {
                 while (sum < 17) {
@@ -25,7 +25,7 @@ public class Bot1Model extends EntityModel {
                 }
             }
         });
-        timer.setRepeats(false);
+        timer.setRepeats(true);
         timer.start();
     }
 

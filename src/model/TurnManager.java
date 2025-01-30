@@ -100,15 +100,15 @@ public class TurnManager extends Observable {
         } else if (PlayerModel.getInstance().getSum() > 21) {
             ProfileManager.getInstance().gameCounter();
             return "LOSE";
-        } else if (DealerModel.getInstance().getSum() > 21) {
+        } else if (DealerModel.getInstance().getSum() > 21 && PlayerModel.getInstance().getSum() <= 21) {
             ProfileManager.getInstance().winCounter();
             ProfileManager.getInstance().gameCounter();
             return "WIN";
-        } else if (PlayerModel.getInstance().getSum() > DealerModel.getInstance().getSum()) {
+        } else if (PlayerModel.getInstance().getSum() > DealerModel.getInstance().getSum() && PlayerModel.getInstance().getSum() <= 21) {
             ProfileManager.getInstance().winCounter();
             ProfileManager.getInstance().gameCounter();
             return "WIN";
-        } else if (PlayerModel.getInstance().getSum() < DealerModel.getInstance().getSum()) {
+        } else if (PlayerModel.getInstance().getSum() < DealerModel.getInstance().getSum() && DealerModel.getInstance().getSum() <= 21) {
             ProfileManager.getInstance().gameCounter();
             return "LOSE";
         } else {

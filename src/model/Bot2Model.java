@@ -10,15 +10,17 @@ public class Bot2Model extends EntityModel {
     }
     @Override
     public void hit() {
-        Timer timer = new Timer(1000, new ActionListener() { // 1 second delay
+        Timer timer = new Timer(200, new ActionListener() { // 1 second delay
             @Override
             public void actionPerformed(ActionEvent e) {
-                while (sum < 17) {
+                if (sum < 17) {
                     Bot2Model.super.hit();
+                } else {
+                    ((Timer) e.getSource()).stop(); // Stop the timer when the condition is met
                 }
             }
         });
-        timer.setRepeats(false);
+        timer.setRepeats(false); // Ensure the timer repeats
         timer.start();
     }
     public static Bot2Model getInstance() {
