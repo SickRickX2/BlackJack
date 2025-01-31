@@ -70,7 +70,8 @@ public class StartPanel extends JPanel {
         logoLabel.setBounds(8, 670, logo.getIconWidth() / 2, logo.getIconHeight() / 2);
         add(logoLabel);
     }
-    private void textLogo(){
+
+    private void textLogo() {
         JLabel logo = new JLabel("by SickRick");
         logo.setBounds(120, 750, 200, 50);
         logo.setFont(new Font("Tahoma", Font.BOLD, 30));
