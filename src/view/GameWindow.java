@@ -15,6 +15,11 @@ public class GameWindow extends JFrame implements Observer {
     private PlayPanel playPanel;
 
     public GameWindow() {
+        try {
+            UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName() );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         initDeck();
