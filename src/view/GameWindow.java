@@ -1,6 +1,5 @@
 package view;
 
-
 import model.AudioManager;
 
 import javax.swing.*;
@@ -10,23 +9,31 @@ import java.awt.event.ComponentEvent;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * The GameWindow class represents the main window of the BlackJack game.
+ * It initializes the game window, sets up the deck panel, and handles screen transitions.
+ */
 public class GameWindow extends JFrame implements Observer {
     private JPanel deck;
     private PlayPanel playPanel;
 
+    /**
+     * Constructs a GameWindow and initializes its components.
+     */
     public GameWindow() {
         try {
-            UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName() );
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-
         initDeck();
         initWindow();
-
     }
 
+    /**
+     * Initializes the main window properties.
+     */
     private void initWindow() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("BlackJack");
@@ -37,15 +44,22 @@ public class GameWindow extends JFrame implements Observer {
         setVisible(true);
     }
 
+    /**
+     * Sets the window icon.
+     */
     private void setIcon() {
         Image icon = new ImageIcon("res/images/Jicon.png").getImage();
         try {
             Taskbar.getTaskbar().setIconImage(icon);
         } catch (Exception e) {
+            // Handle exception if setting the taskbar icon fails
         }
         setIconImage(icon);
     }
 
+    /**
+     * Initializes the deck panel and adds the different game screens to it.
+     */
     private void initDeck() {
         Navigator navigator = new Navigator();
         navigator.addObserver(this);
@@ -84,10 +98,21 @@ public class GameWindow extends JFrame implements Observer {
         add(deck);
     }
 
+    /**
+     * Returns the PlayPanel instance.
+     *
+     * @return the PlayPanel instance
+     */
     public PlayPanel getPlayPanel() {
         return playPanel;
     }
 
+    /**
+     * Updates the displayed screen based on the observed changes.
+     *
+     * @param o   the observable object
+     * @param arg an argument passed to the notifyObservers method
+     */
     @Override
     public void update(Observable o, Object arg) {
         if (o instanceof Navigator && arg instanceof Screen screen)

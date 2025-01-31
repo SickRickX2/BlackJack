@@ -7,7 +7,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * The TiePanel class represents the panel displayed when there is a tie in the game.
+ * It shows a message indicating the tie and displays the leaderboard.
+ */
 public class TiePanel extends JPanel {
+
+    /**
+     * Constructs a TiePanel and initializes its components.
+     */
     public TiePanel() {
         setPreferredSize(new Dimension(WindowDimensions.WIDTH, WindowDimensions.HEIGHT));
         setLayout(new GridLayout(0, 1));
@@ -21,6 +29,9 @@ public class TiePanel extends JPanel {
         setBackground(Color.GRAY);
     }
 
+    /**
+     * Creates and adds the title image to the panel.
+     */
     private void createTitle() {
         ImageIcon title = new ImageIcon("res/images/blackjacktitle.png");
         JLabel titleLabel = new JLabel(title);
@@ -28,6 +39,9 @@ public class TiePanel extends JPanel {
         add(titleLabel);
     }
 
+    /**
+     * Creates and adds the leaderboard title label to the panel.
+     */
     private void leaderboardTitle() {
         JLabel leaderboard = new JLabel("Leaderboard", SwingConstants.CENTER);
         leaderboard.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -35,6 +49,9 @@ public class TiePanel extends JPanel {
         add(leaderboard);
     }
 
+    /**
+     * Prints the top profiles from the leaderboard on the panel.
+     */
     private void printLeaderboard() {
         List<Profile> topProfiles = Leaderboard.getInstance().getTopProfiles(10);
         for (Profile profile : topProfiles) {

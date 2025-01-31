@@ -5,11 +5,19 @@ import controller.StartPanelController;
 import javax.swing.*;
 import java.awt.*;
 
-
+/**
+ * The StartPanel class represents the initial panel of the application.
+ * It is responsible for displaying the start screen with buttons to start or quit the game.
+ */
 public class StartPanel extends JPanel {
     private Navigator navigator;
     private StartPanelController controller;
 
+    /**
+     * Constructs a StartPanel with the specified navigator.
+     *
+     * @param navigator the Navigator object used for navigation between screens
+     */
     public StartPanel(Navigator navigator) {
         this.navigator = navigator;
         this.controller = new StartPanelController(navigator);
@@ -20,14 +28,21 @@ public class StartPanel extends JPanel {
         createTitle();
         createStartButton();
         createQuitButton();
-
     }
 
+    /**
+     * Sets the size of the panel.
+     */
     private void setPanelSize() {
         Dimension size = new Dimension(1200, 800);
         setPreferredSize(size);
     }
 
+    /**
+     * Paints the component with a custom background and grid lines.
+     *
+     * @param g the Graphics object used for painting
+     */
     protected void paintComponent(Graphics g) {
         setPanelSize();
         super.paintComponent(g);
@@ -35,9 +50,11 @@ public class StartPanel extends JPanel {
         g.setColor(new Color(14, 125, 125));
         for (int x = 0; x <= getWidth() + getHeight(); x += density) g.drawLine(x, 0, 0, x);
         this.setBackground(Color.BLACK);
-
     }
 
+    /**
+     * Creates and adds the start button to the panel.
+     */
     private void createStartButton() {
         JButton startButton = new JButton("START");
         startButton.addActionListener(e -> controller.onStartButtonClicked());
@@ -47,14 +64,14 @@ public class StartPanel extends JPanel {
         startButton.setFont(new Font("Tahoma", Font.BOLD, 30));
         startButton.setFocusPainted(false);
         add(startButton);
-
     }
 
+    /**
+     * Creates and adds the quit button to the panel.
+     */
     private void createQuitButton() {
         JButton quitButton = new JButton("QUIT");
-
         quitButton.addActionListener(e -> controller.onQuitButtonClicked());
-
         quitButton.setBounds(500, 600, 200, 50);
         quitButton.setBackground(Color.RED);
         quitButton.setForeground(Color.WHITE);
@@ -63,6 +80,9 @@ public class StartPanel extends JPanel {
         add(quitButton);
     }
 
+    /**
+     * Prints the logo on the panel.
+     */
     private void printLogo() {
         ImageIcon logo = new ImageIcon("res/images/logo.png");
         Image scaledLogo = logo.getImage().getScaledInstance(logo.getIconWidth() / 3, logo.getIconHeight() / 3, Image.SCALE_SMOOTH);
@@ -71,6 +91,9 @@ public class StartPanel extends JPanel {
         add(logoLabel);
     }
 
+    /**
+     * Adds a text label with the author's name to the panel.
+     */
     private void textLogo() {
         JLabel logo = new JLabel("by SickRick");
         logo.setBounds(120, 750, 200, 50);
@@ -79,6 +102,9 @@ public class StartPanel extends JPanel {
         add(logo);
     }
 
+    /**
+     * Creates and adds the title image to the panel.
+     */
     private void createTitle() {
         ImageIcon title = new ImageIcon("res/images/blackjacktitle.png");
         JLabel titleLabel = new JLabel(title);
@@ -86,5 +112,3 @@ public class StartPanel extends JPanel {
         add(titleLabel);
     }
 }
-
-
