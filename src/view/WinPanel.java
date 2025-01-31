@@ -1,5 +1,6 @@
 package view;
 
+import model.AudioManager;
 import model.Leaderboard;
 import model.profiles.Profile;
 
