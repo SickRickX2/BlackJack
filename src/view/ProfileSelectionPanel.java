@@ -1,6 +1,6 @@
 package view;
 
-import model.TurnManager;
+import controller.ProfileSelectionPanelController;
 import model.profiles.ProfileManager;
 
 import javax.swing.*;
@@ -8,6 +8,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class ProfileSelectionPanel extends JPanel {
+    private ProfileSelectionPanelController controller;
     private Navigator navigator;
     private JButton bot0Button;
     private JButton bot1Button;
@@ -20,6 +21,7 @@ public class ProfileSelectionPanel extends JPanel {
 
     public ProfileSelectionPanel(Navigator navigator) {
         this.navigator = navigator;
+        this.controller = new ProfileSelectionPanelController(navigator);
 
         setPanelSize();
         setLayout(null);
@@ -55,10 +57,7 @@ public class ProfileSelectionPanel extends JPanel {
 
     private void createPlayButton() {
         JButton startButton = new JButton("PLAY");
-        startButton.addActionListener(e -> {
-            ProfileManager.getInstance().selectProfile(profileIndex);
-            navigator.navigate(Screen.PLAY);
-            TurnManager.getInstance().createBot();
+        startButton.addActionListener(e -> { controller.onPlayButtonClicked(profileIndex);
         });
         startButton.setBounds(500, 500, 200, 50);
         startButton.setBackground(new Color(14, 125, 125));
@@ -83,11 +82,7 @@ public class ProfileSelectionPanel extends JPanel {
 
     private void createBot0Button() {
         JButton bot0Button = new JButton("0");
-        bot0Button.addActionListener(e -> {
-            resetBotButtons();
-            bot0Button.setForeground(Color.BLACK);
-            TurnManager.getInstance().setBotCount(0);
-        });
+        bot0Button.addActionListener(e -> controller.onCreateBot0ButtonClicked(this,bot0Button));
         bot0Button.setBounds(480, 720, 82, 50);
         bot0Button.setBackground(new Color(14, 125, 125));
         bot0Button.setForeground(Color.BLACK);
@@ -99,11 +94,7 @@ public class ProfileSelectionPanel extends JPanel {
 
     private void createBot1Button() {
         JButton bot1Button = new JButton("1");
-        bot1Button.addActionListener(e -> {
-            resetBotButtons();
-            bot1Button.setForeground(Color.BLACK);
-            TurnManager.getInstance().setBotCount(1);
-        });
+        bot1Button.addActionListener(e ->controller.onCreateBot1ButtonClicked(this,bot1Button));
         bot1Button.setBounds(561, 720, 82, 50);
         bot1Button.setBackground(new Color(14, 125, 125));
         bot1Button.setForeground(Color.WHITE);
@@ -115,11 +106,7 @@ public class ProfileSelectionPanel extends JPanel {
 
     private void createBot2Button() {
         JButton bot2Button = new JButton("2");
-        bot2Button.addActionListener(e -> {
-            resetBotButtons();
-            bot2Button.setForeground(Color.BLACK);
-            TurnManager.getInstance().setBotCount(2);
-        });
+        bot2Button.addActionListener(e -> controller.onCreateBot2ButtonClicked(this,bot2Button));
         bot2Button.setBounds(641, 720, 83, 50);
         bot2Button.setBackground(new Color(14, 125, 125));
         bot2Button.setForeground(Color.WHITE);
@@ -129,7 +116,7 @@ public class ProfileSelectionPanel extends JPanel {
         this.bot2Button = bot2Button;
     }
 
-    private void resetBotButtons() {
+    public void resetBotButtons() {
         bot0Button.setForeground(Color.WHITE);
         bot1Button.setForeground(Color.WHITE);
         bot2Button.setForeground(Color.WHITE);

@@ -1,14 +1,18 @@
 package view;
 
+import controller.StartPanelController;
+
 import javax.swing.*;
 import java.awt.*;
 
 
 public class StartPanel extends JPanel {
     private Navigator navigator;
+    private StartPanelController controller;
 
     public StartPanel(Navigator navigator) {
         this.navigator = navigator;
+        this.controller = new StartPanelController(navigator);
         setPanelSize();
         setLayout(null);
         createTitle();
@@ -34,7 +38,7 @@ public class StartPanel extends JPanel {
 
     private void createStartButton() {
         JButton startButton = new JButton("START");
-        startButton.addActionListener(e -> navigator.navigate(Screen.PROFILE_SELECTION));
+        startButton.addActionListener(e -> controller.onStartButtonClicked());
         startButton.setBounds(500, 500, 200, 50);
         startButton.setBackground(new Color(14, 125, 125));
         startButton.setForeground(Color.WHITE);
@@ -47,7 +51,7 @@ public class StartPanel extends JPanel {
     private void createQuitButton() {
         JButton quitButton = new JButton("QUIT");
 
-        quitButton.addActionListener(e -> System.exit(0));
+        quitButton.addActionListener(e -> controller.onQuitButtonClicked());
 
         quitButton.setBounds(500, 600, 200, 50);
         quitButton.setBackground(Color.RED);

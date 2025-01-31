@@ -1,5 +1,6 @@
 package view;
 
+import controller.PlayPanelController;
 import model.*;
 import model.profiles.ProfileManager;
 
@@ -11,12 +12,15 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class PlayPanel extends JPanel implements Observer {
+    private PlayPanelController controller;
+
     private Navigator navigator;
     private final int CARD_WIDTH = 150 * 80 / 100, CARD_HEIGHT = 204 * 80 / 100;
     private JButton hitButton;
     private JButton stayButton;
 
     public PlayPanel(Navigator navigator) {
+        this.controller = new PlayPanelController(navigator);
         this.navigator = navigator;
         setLayout(new BorderLayout());
         setBackground(Color.BLACK);
@@ -61,7 +65,7 @@ public class PlayPanel extends JPanel implements Observer {
 
     private JButton createQuitButton() {
         JButton quitButton = new JButton("QUIT");
-        quitButton.addActionListener(e -> System.exit(0));
+        quitButton.addActionListener(e -> controller.onQuitButtonClicked());
         quitButton.setBackground(Color.RED);
         quitButton.setForeground(Color.WHITE);
         quitButton.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -71,7 +75,7 @@ public class PlayPanel extends JPanel implements Observer {
 
     private JButton createStayButton() {
         stayButton = new JButton("STAY");
-        stayButton.addActionListener(e -> PlayerModel.getInstance().stay());
+        stayButton.addActionListener(e -> controller.onStayButtonClicked());
         stayButton.setBackground(Color.WHITE);
         stayButton.setForeground(Color.BLACK);
         stayButton.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -81,7 +85,7 @@ public class PlayPanel extends JPanel implements Observer {
 
     private JButton createHitButton() {
         hitButton = new JButton("HIT");
-        hitButton.addActionListener(e -> PlayerModel.getInstance().hit());
+        hitButton.addActionListener(e -> controller.onHitButtonClicked());
         hitButton.setBackground(Color.WHITE);
         hitButton.setForeground(Color.BLACK);
         hitButton.setFont(new Font("Tahoma", Font.BOLD, 30));
