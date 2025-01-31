@@ -15,6 +15,8 @@ public class StartPanel extends JPanel {
         this.controller = new StartPanelController(navigator);
         setPanelSize();
         setLayout(null);
+        printLogo();
+        textLogo();
         createTitle();
         createStartButton();
         createQuitButton();
@@ -61,10 +63,25 @@ public class StartPanel extends JPanel {
         add(quitButton);
     }
 
+    private void printLogo() {
+        ImageIcon logo = new ImageIcon("res/images/logo.png");
+        Image scaledLogo = logo.getImage().getScaledInstance(logo.getIconWidth() / 3, logo.getIconHeight() / 3, Image.SCALE_SMOOTH);
+        JLabel logoLabel = new JLabel(new ImageIcon(scaledLogo));
+        logoLabel.setBounds(8, 670, logo.getIconWidth() / 2, logo.getIconHeight() / 2);
+        add(logoLabel);
+    }
+    private void textLogo(){
+        JLabel logo = new JLabel("by SickRick");
+        logo.setBounds(120, 750, 200, 50);
+        logo.setFont(new Font("Tahoma", Font.BOLD, 30));
+        logo.setForeground(Color.WHITE);
+        add(logo);
+    }
+
     private void createTitle() {
         ImageIcon title = new ImageIcon("res/images/blackjacktitle.png");
         JLabel titleLabel = new JLabel(title);
-        titleLabel.setBounds(300, 50, title.getIconWidth(), title.getIconHeight()); // Posiziona il titolo
+        titleLabel.setBounds(300, 50, title.getIconWidth(), title.getIconHeight());
         add(titleLabel);
     }
 }
