@@ -50,7 +50,7 @@ public class PlayPanel extends JPanel implements Observer {
         setPreferredSize(size);
     }
 
-    protected void createButtons() {
+    private void createButtons() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.BLACK);
         buttonPanel.add(createHitButton());
@@ -59,7 +59,7 @@ public class PlayPanel extends JPanel implements Observer {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
-    protected JButton createQuitButton() {
+    private JButton createQuitButton() {
         JButton quitButton = new JButton("QUIT");
         quitButton.addActionListener(e -> System.exit(0));
         quitButton.setBackground(Color.RED);
@@ -69,7 +69,7 @@ public class PlayPanel extends JPanel implements Observer {
         return quitButton;
     }
 
-    protected JButton createStayButton() {
+    private JButton createStayButton() {
         stayButton = new JButton("STAY");
         stayButton.addActionListener(e -> PlayerModel.getInstance().stay());
         stayButton.setBackground(Color.WHITE);
@@ -79,7 +79,7 @@ public class PlayPanel extends JPanel implements Observer {
         return stayButton;
     }
 
-    protected JButton createHitButton() {
+    private JButton createHitButton() {
         hitButton = new JButton("HIT");
         hitButton.addActionListener(e -> PlayerModel.getInstance().hit());
         hitButton.setBackground(Color.WHITE);

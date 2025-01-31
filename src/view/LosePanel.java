@@ -22,14 +22,14 @@ public class LosePanel extends JPanel {
     }
 
 
-    protected void createTitle() {
+    private void createTitle() {
         ImageIcon title = new ImageIcon("res/images/blackjacktitle.png");
         JLabel titleLabel = new JLabel(title);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(titleLabel);
     }
 
-    protected void leaderboardTitle() {
+    private void leaderboardTitle() {
         JLabel leaderboard = new JLabel("Leaderboard", SwingConstants.CENTER);
         leaderboard.setFont(new Font("Tahoma", Font.BOLD, 30));
         leaderboard.setForeground(Color.WHITE);

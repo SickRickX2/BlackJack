@@ -3,8 +3,8 @@ package model;
 import static model.Value.ACE;
 
 public class CardModel {
-    private Suit suit;
-    private Value value;
+    private final Suit suit;
+    private final Value value;
 
     public CardModel(Suit suit, Value value) {
         this.suit = suit;

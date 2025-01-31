@@ -53,7 +53,7 @@ public class GameWindow extends JFrame implements Observer {
                 add(playPanel, Screen.PLAY.name());
                 add(new WinPanel(navigator), Screen.WIN.name());
                 add(new LosePanel(), Screen.LOSE.name());
-                add(new TiePanel(navigator), Screen.TIE.name());
+                add(new TiePanel(), Screen.TIE.name());
             }
         };
 

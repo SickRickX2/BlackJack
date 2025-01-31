@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.List;
 
 public class TiePanel extends JPanel {
-    public TiePanel(Navigator navigator) {
+    public TiePanel() {
         setPreferredSize(new Dimension(WindowDimensions.WIDTH, WindowDimensions.HEIGHT));
         setLayout(new GridLayout(0, 1));
         JLabel label = new JLabel("It's a tie!", SwingConstants.CENTER);
@@ -21,14 +21,14 @@ public class TiePanel extends JPanel {
         setBackground(Color.GRAY);
     }
 
-    protected void createTitle() {
+    private void createTitle() {
         ImageIcon title = new ImageIcon("res/images/blackjacktitle.png");
         JLabel titleLabel = new JLabel(title);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(titleLabel);
     }
 
-    protected void leaderboardTitle() {
+    private void leaderboardTitle() {
         JLabel leaderboard = new JLabel("Leaderboard", SwingConstants.CENTER);
         leaderboard.setFont(new Font("Tahoma", Font.BOLD, 30));
         leaderboard.setForeground(Color.WHITE);

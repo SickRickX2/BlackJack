@@ -28,7 +28,6 @@ public class ProfileSelectionPanel extends JPanel {
         initAvatars();
         createPlayButton();
         createQuitButton();
-        //createProfileButton();
         createBot0Button();
         createBot1Button();
         createBot2Button();
@@ -40,7 +39,7 @@ public class ProfileSelectionPanel extends JPanel {
     }
 
     private void setPanelSize() {
-        Dimension size = new Dimension(1200, 800);
+        Dimension size = new Dimension(WindowDimensions.WIDTH, WindowDimensions.HEIGHT);
         setPreferredSize(size);
     }
 
@@ -54,7 +53,7 @@ public class ProfileSelectionPanel extends JPanel {
 
     }
 
-    protected void createPlayButton() {
+    private void createPlayButton() {
         JButton startButton = new JButton("PLAY");
         startButton.addActionListener(e -> {
             ProfileManager.getInstance().selectProfile(profileIndex);
@@ -70,19 +69,9 @@ public class ProfileSelectionPanel extends JPanel {
 
     }
 
-    private void createProfileButton() {
-        JButton profileButton = new JButton("PROFILE");
-        //profileButton.addActionListener(e -> navigator.navigate());
-        profileButton.setBounds(500, 400, 200, 50);
-        profileButton.setBackground(Color.WHITE);
-        profileButton.setForeground(new Color(14, 125, 125));
-        profileButton.setFont(new Font("Tahoma", Font.BOLD, 30));
-        profileButton.setFocusPainted(false);
-        add(profileButton);
-    }
 
     private void cpuTitle() {
-        JLabel cpuLabel = new JLabel(" Numero di CPU");
+        JLabel cpuLabel = new JLabel("   CPU Number");
         cpuLabel.setBounds(480, 670, 245, 50);
         cpuLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
         cpuLabel.setForeground(Color.WHITE);
@@ -147,7 +136,7 @@ public class ProfileSelectionPanel extends JPanel {
     }
 
 
-    protected void createQuitButton() {
+    private void createQuitButton() {
         JButton quitButton = new JButton("MENU");
         quitButton.addActionListener(e -> navigator.navigate(Screen.START));
         quitButton.setBounds(500, 600, 200, 50);
@@ -158,9 +147,8 @@ public class ProfileSelectionPanel extends JPanel {
         add(quitButton);
     }
 
-    protected void createTitle() {
+    private void createTitle() {
         JLabel titleLabel = new JLabel("Profile Selection");
-        // Posiziona il titolo
         titleLabel.setBounds(470, 100, 300, 50);
         titleLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
         titleLabel.setForeground(Color.WHITE);

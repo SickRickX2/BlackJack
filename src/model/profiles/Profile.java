@@ -11,8 +11,8 @@ public class Profile implements Serializable {
     public Profile(int avatarID, String username) {
         this.username = username;
         this.avatarID = avatarID;
-        this.numberOfWins = 0;  // Default value
-        this.numberOfPlayedGames = 0;  // Default value
+        this.numberOfWins = 0;
+        this.numberOfPlayedGames = 0;
 
     }
 
@@ -58,16 +58,9 @@ public class Profile implements Serializable {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public int getAvatarID() {
         return avatarID;
-    }
-
-    public void setAvatarID(int avatarID) {
-        this.avatarID = avatarID;
     }
 
     public int getWins() {

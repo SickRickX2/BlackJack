@@ -32,7 +32,7 @@ public class StartPanel extends JPanel {
 
     }
 
-    protected void createStartButton() {
+    private void createStartButton() {
         JButton startButton = new JButton("START");
         startButton.addActionListener(e -> navigator.navigate(Screen.PROFILE_SELECTION));
         startButton.setBounds(500, 500, 200, 50);
@@ -44,7 +44,7 @@ public class StartPanel extends JPanel {
 
     }
 
-    protected void createQuitButton() {
+    private void createQuitButton() {
         JButton quitButton = new JButton("QUIT");
 
         quitButton.addActionListener(e -> System.exit(0));
@@ -57,7 +57,7 @@ public class StartPanel extends JPanel {
         add(quitButton);
     }
 
-    protected void createTitle() {
+    private void createTitle() {
         ImageIcon title = new ImageIcon("res/images/blackjacktitle.png");
         JLabel titleLabel = new JLabel(title);
         titleLabel.setBounds(300, 50, title.getIconWidth(), title.getIconHeight()); // Posiziona il titolo
