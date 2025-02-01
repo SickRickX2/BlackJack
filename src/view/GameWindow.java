@@ -63,7 +63,6 @@ public class GameWindow extends JFrame implements Observer {
     private void initDeck() {
         Navigator navigator = new Navigator();
         navigator.addObserver(this);
-        AudioManager.getInstance().playMenuMusic();
         playPanel = new PlayPanel(navigator);
         deck = new JPanel(new CardLayout()) {
             {

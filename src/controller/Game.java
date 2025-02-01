@@ -1,9 +1,6 @@
 package controller;
 
-import model.DealerModel;
-import model.DeckModel;
-import model.PlayerModel;
-import model.TurnManager;
+import model.*;
 import model.profiles.ProfileManager;
 import view.GameWindow;
 
@@ -37,6 +34,7 @@ public class Game implements Runnable {
         DeckModel.getInstance();
         DealerModel.getInstance();
         PlayerModel.getInstance();
+        AudioManager.getInstance().playMenuMusic();
 
         TurnManager.getInstance().addObserver(gameWindow.getPlayPanel());
     }
