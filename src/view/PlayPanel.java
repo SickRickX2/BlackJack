@@ -1,7 +1,12 @@
 package view;
 
 import controller.PlayPanelController;
-import model.*;
+import model.CardModel;
+import model.Bot1Model;
+import model.Bot2Model;
+import model.DealerModel;
+import model.PlayerModel;
+import model.TurnManager;
 import model.profiles.ProfileManager;
 
 import javax.swing.*;
